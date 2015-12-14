@@ -1,2 +1,8 @@
 /svn
 .svn
+.externalToolBuilders
+writeup/
+.project
+.cache-main
+bin/
+tools/
