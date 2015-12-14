@@ -1,0 +1,11 @@
+//Output: Success.
+//should be failed later tho.
+class Q{
+      int fish(boolean filet){
+      	  if(filet){
+		return 1;
+	  }else{
+		filet = true;
+	  }
+      }
+}

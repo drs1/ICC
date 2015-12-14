@@ -1,0 +1,27 @@
+class A { 
+
+}
+
+class B extends A { 
+
+}
+
+class C extends B { 
+  void f(A a;
+  , B b;
+  , ){
+    
+    
+  }
+  void g(){
+    
+    A a = new A ()
+    B b = new B ()
+    this.f(ab);
+    this.f(bb);
+    
+  }
+  
+}
+
+Success.

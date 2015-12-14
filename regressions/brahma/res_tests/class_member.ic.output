@@ -1,0 +1,18 @@
+class Cat { 
+  int x,;
+  
+
+}
+
+class Fish { 
+  void main(){
+    
+    Cat y;
+    int z;
+    z = y.x;
+    
+  }
+  
+}
+
+Success.

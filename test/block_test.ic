@@ -1,0 +1,25 @@
+//output: Failed.
+
+class TestClass{
+      void main(string[] args){
+      	   
+      }     
+
+      string println(string s){
+
+      {
+	int i = 0;
+	string s = "test";
+
+      }	
+
+      }
+
+
+}
+
+class TestClass2{
+      void main(string[] args){
+
+      }
+}

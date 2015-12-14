@@ -1,0 +1,5 @@
+//output: Failed.
+
+class A{
+      void main(B b, string s){}
+}

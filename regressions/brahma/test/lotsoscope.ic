@@ -1,0 +1,18 @@
+//output: Success.
+
+class LotsOScope {
+  void hello(int world) {
+    int x, y;
+    {
+      int z;
+      while (z > 0) {
+        goodbye(2);
+        break;
+      }
+    }
+  }
+		
+  int goodbye(int world) {
+    return world;
+  }		
+}

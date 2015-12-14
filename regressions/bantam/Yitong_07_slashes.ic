@@ -1,0 +1,7 @@
+//Output: Success.
+class Aubasldf{
+      string s;
+      void d(){
+      	  s = "\t\n\"\\";
+      }
+}

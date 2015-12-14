@@ -1,0 +1,7 @@
+//output: Failed.
+
+class A{
+	void main(string[] args){
+		return main(string[] args){
+	}
+}

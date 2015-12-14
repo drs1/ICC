@@ -1,0 +1,12 @@
+//output: Success.
+
+class Class {
+    void foo(int bar, int baz) {
+    }
+
+    void baz(int foo, int bar) {
+    }
+
+    void bar(int baz, int foo) {
+    }
+}

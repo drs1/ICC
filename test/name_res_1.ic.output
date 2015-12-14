@@ -1,0 +1,6 @@
+class A extends B { 
+
+}
+
+Couldn't resolve extended class A on line 3
+Failed.

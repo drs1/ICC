@@ -1,0 +1,13 @@
+class Concat { 
+  void foo(){
+    
+    String s = "hi"
+    String t = "bye"+" "
+    String r;
+    r = s+t+"yolo";
+    
+  }
+  
+}
+
+Success.

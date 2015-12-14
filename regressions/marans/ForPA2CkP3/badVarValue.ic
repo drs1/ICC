@@ -1,0 +1,7 @@
+//output: Failed.
+
+class A{
+      void m(int x){
+      	   x = y + 3;
+}
+}

@@ -1,0 +1,11 @@
+//output: Success.
+
+class A {
+}
+
+class B {
+      void main(string[] args) {
+      	   A a = new A();
+	   A otherA = null;
+      }
+}

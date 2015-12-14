@@ -1,0 +1,4 @@
+//output: Success.
+class EmptyStmt {
+      void f() { }
+}

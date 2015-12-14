@@ -1,0 +1,25 @@
+class Bush { 
+
+}
+
+class Test { 
+  int[] array,;
+  
+  String a,;
+  
+  boolean file(){
+    
+    boolean var = true
+    boolean var1 = false
+    boolean var2;
+    boolean temp = this.file();
+    
+    Bush t = new Bush ()
+    array[1] = 3;
+    a = "stuff";
+    
+  }
+  
+}
+
+Success.

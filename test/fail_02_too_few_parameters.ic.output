@@ -1,0 +1,21 @@
+class R { 
+  int m(int a;
+  , String b;
+  , int[] c;
+  , ){
+    
+    return a+c.length;
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    int b = this.m(1"2");
+    
+    
+  }
+  
+}
+
+Method m does not have right number of parameters on line5
+Failed.

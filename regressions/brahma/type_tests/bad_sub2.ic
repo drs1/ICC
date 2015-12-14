@@ -1,0 +1,9 @@
+//output: Failed.
+
+class Foo {
+    int f() {
+        int z;
+        z = true - false;
+        return z;
+    }
+}

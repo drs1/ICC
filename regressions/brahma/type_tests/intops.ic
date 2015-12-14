@@ -1,0 +1,10 @@
+//output: Success.
+
+class Foofoo {
+    string m() {
+        int a = 2 % 4;
+        int b = 4 - 7 * 3 % 3;
+        int c = 2 + 3 * 7 % 4;
+        return "";
+    }
+}

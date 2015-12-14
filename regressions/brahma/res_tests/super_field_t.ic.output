@@ -1,0 +1,16 @@
+class Sup { 
+  int s,;
+  
+
+}
+
+class Sub extends Sup { 
+  void foo(){
+    
+    this.s = 2;
+    
+  }
+  
+}
+
+Success.

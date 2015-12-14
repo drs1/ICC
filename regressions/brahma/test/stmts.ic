@@ -1,0 +1,17 @@
+//output: Failed.
+
+class Meow {
+      int meow() {
+           Library.println("hi");
+           return 2;
+           return 3;
+           if (true) break; else break;
+           if (true) break;
+           while (true) break;
+           break;
+           continue;
+          {}
+
+
+      }
+}

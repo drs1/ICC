@@ -1,0 +1,27 @@
+class A { 
+  int a,;
+  
+  int m(){
+    
+    while(true) {
+      
+      {
+        
+        if(true) {
+          
+          continue;{
+            
+            break;
+          }
+          
+        }
+        
+      }
+      
+    }
+    
+  }
+  
+}
+
+Success.

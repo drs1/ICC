@@ -1,0 +1,8 @@
+//output: Failed.
+
+class Cat {
+
+    void method() {
+        int z = x + 3 == 7 || a[1] > -x;
+    }
+}

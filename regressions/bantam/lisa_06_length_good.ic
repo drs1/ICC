@@ -1,0 +1,8 @@
+//Output: Failed.
+
+class Test {
+  void methodTest() {
+    int[] d = new int[5];
+    return d.length;
+  }
+}

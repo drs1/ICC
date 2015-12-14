@@ -1,0 +1,11 @@
+//output: Success.
+
+class A {}
+
+class B extends A {}
+
+class C {
+      void main(string[] args) {
+      	   A a = new B();
+      }
+}

@@ -1,0 +1,8 @@
+//output: Failed.
+
+class A {
+      int m() {
+      	  x = 5;
+	  return x;
+      }
+}

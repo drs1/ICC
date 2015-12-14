@@ -1,0 +1,12 @@
+//output: Failed.
+
+class A {
+      void m(string s) {
+      }
+}
+
+class B extends A {	
+      int m(string s) {
+      	  return 1;
+      }
+}

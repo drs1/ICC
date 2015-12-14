@@ -1,0 +1,10 @@
+//output: Success.
+
+class Arr {
+
+    Arr[] foo;
+    int x;
+    void moo() {
+        int z = foo[1].x;
+    }
+}

@@ -1,0 +1,7 @@
+//output: Success.
+
+class A{
+      void m(){
+      	   Library.readln();
+      }
+}

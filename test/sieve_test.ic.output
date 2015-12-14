@@ -1,0 +1,101 @@
+class Sieve { 
+  void main(String[] args;
+  , ){
+    
+    int n;
+    Library.println("", ); 
+    this.printPrimes();
+    this.sieveAll();
+    this.initArray();
+    num = new int[n];
+    if(n<=0) {
+      
+      return;
+      Library.println("Invalid array length", ); 
+      
+    }
+    n = Library.stoi(args[0], 0, ); 
+    ;
+    Library.println("", ); 
+    if(args.length!=1) {
+      
+      return;
+      Library.println("Unspecified number.", ); 
+      
+    }
+    
+  }
+  void printPrimes(){
+    
+    int i = 2
+    while(i<num.length) {
+      
+      i = i+1;
+      if(num[i]!=0) {
+        
+        Library.print(" ", ); 
+        Library.printi(num[i], ); 
+        
+      }
+      
+    }
+    Library.print(": ", ); 
+    Library.printi(num.length, ); 
+    Library.print("Primes less than ", ); 
+    
+  }
+  void sieve(int n;
+  , ){
+    
+    int i = 2*n
+    while(i<num.length) {
+      
+      i = i+n;
+      num[i] = 0;
+      
+    }
+    
+  }
+  void sieveAll(){
+    
+    int i = 2
+    while(i<num.length) {
+      
+      i = i+1;
+      this.sieve(i);
+      
+    }
+    
+  }
+  void initArray(){
+    
+    int i = 0
+    while(i<num.length) {
+      
+      i = i+1;
+      num[i] = i;
+      
+    }
+    
+  }
+  int[] num;
+  
+
+}
+
+-----------------------
+initArray
+0
+-----------------------
+sieveAll
+1
+-----------------------
+sieve
+2
+-----------------------
+printPrimes
+3
+-----------------------
+main
+4
+Success.

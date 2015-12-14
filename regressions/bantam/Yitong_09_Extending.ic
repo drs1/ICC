@@ -1,0 +1,22 @@
+//Output: Success.
+class A{
+      int y;
+      int x;
+      string methodA(int e){
+      	     return "loser";
+      }
+}
+class B extends A{
+      int z;
+}
+class C{
+      void stupid(){
+      	    A father = new A();
+     	     B son = new B();
+	     {int b = father.x;}
+      	     
+{      	     string s = son.methodA(6);
+      	     string d = son.methodA(5);
+}
+      }
+}

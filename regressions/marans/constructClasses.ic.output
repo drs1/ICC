@@ -1,0 +1,16 @@
+class A { 
+
+}
+
+class B { 
+  void main(String[] args;
+  , ){
+    
+    A a = new A ()
+    A otherA = null
+    
+  }
+  
+}
+
+Success.

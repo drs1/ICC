@@ -1,0 +1,12 @@
+//output: Success.
+
+class A {
+      void m(string s, int[] array) {
+      }
+}
+
+class B extends A {
+      void m(string s, int[] a) {
+      	   Library.print(s);
+      }
+}

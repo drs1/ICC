@@ -1,0 +1,26 @@
+class TestClass { 
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+class TestClass2 { 
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+-----------------------
+main
+0
+-----------------------
+main
+0
+More than 1 main method found in the same file.
+Failed.

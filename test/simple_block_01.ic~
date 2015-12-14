@@ -1,0 +1,9 @@
+class Batman{
+    void main(string[] args) {
+        int i = 1;
+	int j = 2;
+	{
+		i = j;
+	}
+    }
+}

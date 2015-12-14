@@ -1,0 +1,5 @@
+//Output: Failed.
+
+class Test {
+  new Class(48);
+}

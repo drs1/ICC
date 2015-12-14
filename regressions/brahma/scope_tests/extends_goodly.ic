@@ -1,0 +1,9 @@
+//output: Success.
+
+class Cat {
+    int x;
+}
+
+class Dog extends Cat {
+    int z;
+}

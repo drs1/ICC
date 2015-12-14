@@ -1,0 +1,7 @@
+//Output: Failed.
+class A {
+      int foo(int x){
+      	  int this = 7;
+	  return 3;
+      }
+}

@@ -1,0 +1,9 @@
+//Output: Failed.
+
+class A {
+      int a;
+}
+
+class B extends A {
+      int a;
+}

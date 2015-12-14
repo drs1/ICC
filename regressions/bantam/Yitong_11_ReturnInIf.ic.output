@@ -1,0 +1,20 @@
+class Q { 
+  int fish(boolean filet;
+  , ){
+    
+    if(filet) {
+      
+      return 1;
+      
+    }
+     else {
+      
+      filet = true;
+      
+    }
+    
+  }
+  
+}
+
+Success.

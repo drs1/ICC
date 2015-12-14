@@ -1,0 +1,19 @@
+class A { 
+
+}
+
+class B extends A { 
+
+}
+
+class C { 
+  void main(String[] args;
+  , ){
+    
+    A a = new B ()
+    
+  }
+  
+}
+
+Success.

@@ -1,0 +1,12 @@
+//output: Success.
+
+class X {
+    int x;
+
+    int x(X x) {
+        X z = new X();
+        z.x = x.x + 2;
+        z.x = x(z);
+        return z.x % x.x;
+    }
+}

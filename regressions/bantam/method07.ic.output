@@ -1,0 +1,17 @@
+class B { 
+
+}
+
+class A extends B { 
+  int main(String s;
+  , B a;
+  , B b;
+  , ){
+    
+    this.main("hello"new B ()new A ());
+    
+  }
+  
+}
+
+Success.

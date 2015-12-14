@@ -1,0 +1,8 @@
+//Output: Failed.
+
+class Test {
+  void methodTest() {
+    int d = thing.length;
+    return expr.length;
+  }
+}

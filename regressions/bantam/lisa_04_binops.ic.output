@@ -1,0 +1,17 @@
+class Test { 
+  int methodTest(int a;
+  , int b;
+  , ){
+    
+    boolean lt = a<b
+    boolean le = a<=b
+    boolean gt = b>a
+    boolean ge = b>=a
+    boolean eq = a==b
+    boolean ne = a!=b
+    
+  }
+  
+}
+
+Success.

@@ -1,0 +1,7 @@
+//Output: Success.
+class Classs{
+      int as;
+       int method(){
+      	  int stuff = -3;
+      }
+}

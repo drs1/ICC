@@ -1,0 +1,18 @@
+//Output: Success.
+
+class Test {
+  void methodTest() {
+    int i = 2 + 5;
+    int j = 10 - 6;
+    int k;
+    k = i*j;
+    {
+    int l = j/k;
+    {int remainder = k % l;
+    boolean and = true && true;
+    {boolean or = and && false;
+}
+}
+}  
+}
+}

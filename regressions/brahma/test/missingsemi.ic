@@ -1,0 +1,6 @@
+//output: Failed.
+class MissingSemi {
+      void f() {
+      	   int x = 4
+      }
+}     

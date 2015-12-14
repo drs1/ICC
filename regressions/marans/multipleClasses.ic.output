@@ -1,0 +1,60 @@
+class A { 
+  void main(String[] args;
+  , ){
+    
+    if(args.length>0) {
+      
+      int i;
+      i = 0;
+      while(i<args.length) {
+        
+        Library.println(args[i], ); 
+        
+      }
+      
+    }
+    
+  }
+  int someMethod(){
+    
+    return 1;
+    
+  }
+  
+}
+
+class B extends A { 
+  void main(String[] args;
+  , ){
+    
+    A testClass = new A ()
+    testClass.someMethod();
+    
+  }
+  
+}
+
+class C extends B { 
+  int a,c,b;
+  
+  String s,;
+  
+  void main(String[] args;
+  , ){
+    
+    s = "Hello";
+    this.getString();
+    
+  }
+  String getString(){
+    
+    String s2 = " "
+    String s3 = "World"
+    String s4 = "!"
+    return s+s2+s3+s4;
+    
+  }
+  
+}
+
+Success.

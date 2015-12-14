@@ -1,0 +1,17 @@
+//Output: Success.
+class A{
+      string y;
+      boolean x;
+      string retString(){
+      	     return y;
+      }
+      boolean retBoolean(boolean z){
+      	      return x&&z;
+      }
+      
+      void retNone(int n){
+      	   n = n + 1;
+      }
+
+      
+}

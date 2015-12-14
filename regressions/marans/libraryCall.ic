@@ -1,0 +1,7 @@
+//output: Failed.
+
+class HelloWorld extends A {
+      void makeLibCall() {
+      	   Library.println("hello world");
+      }
+}

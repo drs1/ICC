@@ -1,0 +1,34 @@
+class TestClass2 { 
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+class TestClass { 
+  String println(String s;
+  , ){
+    
+    int i = 0
+    String t = "test"
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    TestClass2 tc = new TestClass2 ()
+    
+  }
+  
+}
+
+-----------------------
+main
+0
+-----------------------
+main
+0
+More than 1 main method found in the same file.
+Failed.

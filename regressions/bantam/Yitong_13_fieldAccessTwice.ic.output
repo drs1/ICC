@@ -1,0 +1,19 @@
+class Tweetie { 
+  int bird,;
+  
+
+}
+
+class Salvestor { 
+  Tweetie birdieBoy,;
+  
+  int main(){
+    
+    birdieBoy = new Tweetie ();
+    if(birdieBoy.bird+birdieBoy.bird>7) return birdieBoy.bird;
+    
+  }
+  
+}
+
+Success.

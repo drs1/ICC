@@ -1,0 +1,9 @@
+//output: Failed.
+
+class Catcat {
+
+    void foofoo() {
+        int xx;
+        yy = xx;
+    }
+}

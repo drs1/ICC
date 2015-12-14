@@ -1,0 +1,10 @@
+We have implemented a list of case classes which represent the nodes of our AST.  In our
+JavaCup file, we use these case classes to build up an AST.  Instead of adding a node for every grammar reduction, we sometimes
+build up lists or options, or skip straight to the value of the node.  We also implemented a pretty print that pattern
+matches on the case classes.
+
+We tested this code by running it on a few programs and looking at the AST using the pretty print.
+
+Currently, we have a bug with the pretty print because our parser returns type Object, but we need to run the
+pretty print on type ASTNode.  We have checked the CUP file, and the start node should return an AST program,
+which extends AST node.  Nobody we have asked knows how to fix this.

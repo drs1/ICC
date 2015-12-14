@@ -1,0 +1,7 @@
+//output: Failed.
+
+class Boo {
+    void booboo() {
+        return 2;
+    }
+}

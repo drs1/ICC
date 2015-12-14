@@ -1,0 +1,7 @@
+//output: Failed.
+
+class A{
+      void f(string s){
+      	   Library.print(true);
+      }
+}

@@ -1,0 +1,8 @@
+//output: Failed.
+
+class Digimon {
+      int digitalMonsters() {
+      	  new int];
+	  return 2;
+      }
+}

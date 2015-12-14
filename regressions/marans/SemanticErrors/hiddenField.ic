@@ -1,0 +1,18 @@
+//output: Failed.
+
+class M{
+      int a;
+      int b;
+}
+
+class N extends M{
+      int[] a;
+      M b; 
+      
+      void main(string[] args){}
+
+      void test() {
+        a[0] = b.b;    
+	}
+
+}

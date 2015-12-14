@@ -1,0 +1,4 @@
+//output: Failed.
+
+class A extends B{
+}

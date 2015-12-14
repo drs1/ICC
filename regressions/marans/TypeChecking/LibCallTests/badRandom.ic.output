@@ -1,0 +1,2 @@
+Library method random expected List(ASTTypeInt(0)) found List(ASTVarAccess(s,5)) on line: 5
+Failed.

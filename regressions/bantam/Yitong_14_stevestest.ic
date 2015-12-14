@@ -1,0 +1,10 @@
+//Output: Failed.
+
+class A{
+      void m(){
+      	  int x = 2;
+	  int y = x + z;
+	  int z = 0;
+      }
+
+}

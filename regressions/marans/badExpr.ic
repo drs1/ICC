@@ -1,0 +1,13 @@
+//output: Failed.
+
+class X {
+      void badExpr(){
+      	   boolean nola = true;
+	   boolean alexis = true;
+      	   
+	   //unfinished expression
+	   if(nola != alexis){
+	   	   2 + 
+	   }
+      }
+}

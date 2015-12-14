@@ -1,0 +1,22 @@
+class A { 
+  A m3(A a;
+  , ){
+    
+    A x = this
+    
+  }
+  
+}
+
+class B extends A { 
+  A m4(B b;
+  , ){
+    
+    A x = new B ()
+    return x;
+    
+  }
+  
+}
+
+Success.

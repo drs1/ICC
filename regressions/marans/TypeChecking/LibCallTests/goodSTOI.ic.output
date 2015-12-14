@@ -1,0 +1,13 @@
+class A { 
+  void m(int i;
+  , String s;
+  , ){
+    
+    Library.stoi("hi", 5, ); 
+    Library.stoi(s, i, ); 
+    
+  }
+  
+}
+
+Success.

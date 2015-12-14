@@ -1,0 +1,15 @@
+This week we implemented a tac generator, and an offset calculator.
+
+For our tac generator, we started from the given tac specification.  We took out pointer
+instructions and added runtime, null checks, and operations for mod.  We then generated this
+tac by traversing our AST and adding the appropriate TAC to a list of tac instructions held in
+each methdoDecl.  The order these chunks of TAC instructions is not important, since they are
+all methods that will be called with a jump.
+
+For the offset calculator, we set an offset for every VarDecl, MethodDecl, and ClassDecl to
+be held in the frame.  The offsets for MethodDecls should be the same for the same methods
+when the methods are inherited from a superclass.  We assure this by picking offsets for
+each method in a class, and reserving those offset values in all subclasses.
+
+-PrintIR prints the TAC (what you wanted), but also prints a list of the offsets and v-table
+information in a pretty way (which is easier to see than putting it in the AST).

@@ -1,0 +1,7 @@
+//Output: Success.
+class A {
+      boolean x;
+      boolean m() {
+          this.x = !x;
+}
+}

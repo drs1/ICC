@@ -1,0 +1,12 @@
+class A { 
+  void m(boolean b;
+  , ){
+    
+    Library.printb(true, ); 
+    Library.printb(b, ); 
+    
+  }
+  
+}
+
+Success.

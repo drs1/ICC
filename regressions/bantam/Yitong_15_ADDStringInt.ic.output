@@ -1,0 +1,21 @@
+class A { 
+  int x,;
+  
+  int y,;
+  
+  String z,;
+  
+  String a,;
+  
+  void binop(){
+    
+    x = x+y;
+    x = x+4;
+    a = a+z;
+    a = a+"Hogwarts";
+    
+  }
+  
+}
+
+Success.

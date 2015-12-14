@@ -1,0 +1,13 @@
+class Aubasldf { 
+  String s,;
+  
+  void d(){
+    
+    s = "	
+    "\";
+    
+  }
+  
+}
+
+Success.

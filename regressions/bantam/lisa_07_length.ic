@@ -1,0 +1,7 @@
+//Output: Failed.
+
+class Test {
+  void method {
+    new.length;
+  }
+}

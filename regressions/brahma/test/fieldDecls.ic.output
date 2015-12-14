@@ -1,0 +1,11 @@
+class Foo { 
+  int cat,;
+  
+  boolean foo,;
+  
+  String bat,;
+  
+
+}
+
+Success.

@@ -1,0 +1,7 @@
+//Output: Success.
+
+class Test {
+  int i;
+  string s;
+  boolean b;
+}

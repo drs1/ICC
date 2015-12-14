@@ -1,0 +1,14 @@
+//output: Success.
+
+class A {
+	void f(int i, boolean b, string s) { }
+}
+
+class B {
+	void g(int x) {
+		boolean beta;
+		string stringy;
+		A instanceOfA = new A();
+		instanceOfA.f(x, beta, stringy);	
+	}
+}

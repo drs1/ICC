@@ -1,0 +1,14 @@
+//output: Failed.
+
+class FailedStmt {
+      void failThis() {
+      	   
+	   int a = 0; 
+	   int b = 6;
+      	   
+	   //closing paren at the wrong place
+	   if(a == b {
+	   	a = a + 1;
+	   })
+      }
+}

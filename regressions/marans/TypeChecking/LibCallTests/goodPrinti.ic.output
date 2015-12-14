@@ -1,0 +1,12 @@
+class A { 
+  void m(int i;
+  , ){
+    
+    Library.printi(6, ); 
+    Library.printi(i, ); 
+    
+  }
+  
+}
+
+Success.

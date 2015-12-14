@@ -1,0 +1,18 @@
+class X { 
+  int x,;
+  
+  X y,;
+  
+  X x(int x;
+  , ){
+    
+    X z = new X ()
+    z.y = this.x(this.x+3);
+    ;
+    return z;
+    
+  }
+  
+}
+
+Success.

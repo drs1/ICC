@@ -1,0 +1,8 @@
+//output: Failed.
+
+class A {
+      void m(string[] args) {
+      	   while(true) {}
+	   break;
+      }
+}

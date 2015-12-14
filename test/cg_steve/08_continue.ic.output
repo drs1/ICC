@@ -1,0 +1,37 @@
+class Continue { 
+  void main(String[] args;
+  , ){
+    
+    int x = 1
+    int y = 0
+    boolean a = true
+    boolean b = false
+    Library.println("", ); 
+    Library.printb(b, ); 
+    Library.println("", ); 
+    Library.printb(a, ); 
+    Library.println("", ); 
+    Library.printi(y, ); 
+    Library.println("", ); 
+    Library.printi(x, ); 
+    while(x+y<=5&&a) {
+      
+      b = !b;
+      while(x<3*y) {
+        
+        x = x+2;
+        if(b) continue;x = x+1;
+        
+      }
+      y = y+1;
+      
+    }
+    
+  }
+  
+}
+
+-----------------------
+main
+0
+Success.

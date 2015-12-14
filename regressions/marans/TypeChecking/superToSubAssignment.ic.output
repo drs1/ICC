@@ -1,0 +1,2 @@
+Can't assign a value of type ASTTypeClass(A,3) to a location of type ASTTypeClass(B,8) on line: 9
+Failed.

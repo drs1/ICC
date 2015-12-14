@@ -1,0 +1,14 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|Entry\n}"];
+B1[label="{Block 1|Exit\n}"];
+B2[label="{Block 2|j = 2\n}"];
+B3[label="{Block 3|i = 1\n}"];
+B4[label="{Block 4|i = j\n}"];
+B5[label="{Block 5|j = 4\n}"];
+B0 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B1;
+}

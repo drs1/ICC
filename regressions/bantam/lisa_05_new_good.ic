@@ -1,0 +1,13 @@
+//Output: Success.
+
+class Class {
+  int i;
+}
+
+class Test {
+  boolean test() {
+    Class s = new Class();
+    int[] i = new int[7];
+    
+  }
+}

@@ -1,0 +1,12 @@
+//output: Failed.
+
+class Chef {
+
+    int cook(int food) {
+        fish = food;
+        {
+            int fish = 3;
+        }
+        return fish;
+    }
+}

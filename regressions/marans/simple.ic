@@ -1,0 +1,13 @@
+//output: Success.
+
+class A {
+      int x;
+      int y;
+      string c;
+
+      int x(int y, string s) { return y; }
+}
+
+class B extends A {
+      boolean b;
+}

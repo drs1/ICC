@@ -1,0 +1,6 @@
+//output: Success.
+class TestClass{
+      void main(string[] args){
+
+      }     
+}

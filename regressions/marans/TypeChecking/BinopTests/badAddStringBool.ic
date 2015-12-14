@@ -1,0 +1,9 @@
+jo//output: Failed.
+
+class A{
+
+      string a(string b, boolean c){
+      	     return b + c;
+      }
+
+}

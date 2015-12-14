@@ -1,0 +1,12 @@
+//output: Failed.
+class TestClass{
+      void main(string[] args){
+      	   
+      }     
+}
+
+class TestClass2{
+      void main(string[] args){
+
+      }
+}

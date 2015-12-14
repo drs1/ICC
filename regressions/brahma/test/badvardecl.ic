@@ -1,0 +1,7 @@
+//output: Failed.
+
+class Coolio {
+   void fityCent() {
+        int m = 45, int yoyoma = 89;
+    }
+}

@@ -1,0 +1,25 @@
+class A { 
+  boolean ander(boolean a;
+  , boolean b;
+  , ){
+    
+    return a&&b;
+    
+  }
+  boolean orer(boolean a;
+  , boolean b;
+  , ){
+    
+    return a||b;
+    
+  }
+  void noter(boolean b;
+  , ){
+    
+    boolean c = !true
+    
+  }
+  
+}
+
+Success.

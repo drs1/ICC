@@ -1,0 +1,11 @@
+//output: Failed.
+
+class BadWhile {
+
+    void f() {
+        while(2) {
+            return;
+            break;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+class Fibonacci { 
+  int fib(int n;
+  , ){
+    
+    return this.fib(n-1);
+    +this.fib(n-2);
+    ;
+    if(n<2) return n;
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    String s = args[0]
+    int n;
+    int r;
+    Library.println("", ); 
+    Library.printi(r, ); 
+    r = this.fib(n);
+    ;
+    n = Library.stoi(s, -1, ); 
+    ;
+    
+  }
+  
+}
+
+-----------------------
+main
+0
+-----------------------
+fib
+1
+Success.

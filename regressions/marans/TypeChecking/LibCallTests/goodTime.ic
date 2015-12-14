@@ -1,0 +1,7 @@
+//output: Success.
+
+class A{
+      void m(string s){
+      	   Library.time();
+      }
+}

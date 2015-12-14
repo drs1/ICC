@@ -1,0 +1,15 @@
+//Output: Success.
+class Bush{}
+class Test{
+      int[] array;
+      string a;
+      boolean file(){
+     	      boolean var = true, var1 = false, var2;
+	      boolean temp = this.file();
+	      Bush t = new Bush(); //I guess this is okay...	      
+	      array[1] = 3;
+	      a = "stuff";
+      }
+
+
+}

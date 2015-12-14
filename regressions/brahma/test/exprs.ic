@@ -1,0 +1,15 @@
+//output: Failed.
+
+class Meow {
+      void meow() {
+          Library.println(Library.meow(this),
+                          this,
+                          new Meow(),
+                          new Meow[this],
+                          this.length,
+                          this==this,
+                          !this,
+                          "",
+                          (this));
+      }
+}

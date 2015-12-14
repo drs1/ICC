@@ -1,0 +1,10 @@
+//output: Failed.
+
+class Foo {
+
+    int m;
+}
+
+class Bar extends Foo {
+    char m;
+}

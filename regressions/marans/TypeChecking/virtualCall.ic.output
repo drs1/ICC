@@ -1,0 +1,21 @@
+class A { 
+  void m(){
+    
+    
+  }
+  
+}
+
+class B { 
+  A a,;
+  
+  void main(String[] args;
+  , ){
+    
+    a.m();
+    
+  }
+  
+}
+
+Success.

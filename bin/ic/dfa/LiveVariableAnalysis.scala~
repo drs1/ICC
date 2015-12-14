@@ -1,0 +1,246 @@
+package ic.dfa;
+
+import ic.cfg.ControlFlowGraph;
+import ic.tac._;
+import ic.ast._;
+
+/**
+ * A simple analysis to determine whether there are
+ * unreachable statements in a program.  That is it, 
+ * determines whether there is a path from the entry to 
+ * each program point.  For example:
+ * <pre>
+ * void main(string[] a) {
+ *   boolean b;
+ *   int y,z;
+ *   if (b) {
+ *      return;
+ *      z = z + 1;  // NOT REACHABLE
+ *   } 
+ *   y = y + 1;
+ * }
+ * </pre>	
+ * In this code, the assignment following the return is not reachable.
+ * The analysis is defined as follows:
+ * <pre>
+ *   D  : forward
+ *   V  : { true, false }  where true < false.  
+ *   Top: false.
+ *   /\ : boolean ||
+ *   f  : f_I(s) = s for all instructions I
+ *   boundary:  OUT[in] = true
+ * </pre>
+ * After dataflow analysis, unreachable blocks will have IN[b] == false.
+ */
+class LiveVariableAnalysis(override val cfg : ControlFlowGraph) extends DataFlowAnalysis[Set[TACOp]](cfg)  {
+  //IN[OUT] should remain empty
+	def boundary() = Set[TACOp]();
+	
+	//Set unioned with empty set returns itself
+	def top() = Set[TACOp]();
+	
+	//Two sets are equal if they are both subsets of each other
+	def equals(t1 : Set[TACOp], t2: Set[TACOp]): Boolean = t1.equals(t2);
+	
+	//Backwards Analysis
+	def isForward() = false;
+	
+	
+	// Define as union
+	def meet(t1 : Set[TACOp], t2: Set[TACOp]): Set[TACOp] = t1 | t2;
+	
+	//
+	def transfer(instr : TACInstr, out: Set[TACOp]): Set[TACOp] = {
+	  val useB: Set[TACOp] = use(instr);
+	  val defB: Set[TACOp] = define(instr);
+	  return useB | (out -- defB);
+	}
+	
+	//only adds the variable to the set if it is a temp or a variable
+	def addIfVariable(defineSet: Set[TACOp], op: TACOp): Set[TACOp] = {
+	  op match {
+	    case TAC_Var(_, _, _) => {
+	      return defineSet + op;
+	    }
+	    case TAC_Temp(_, _, _, _) => {
+	      return defineSet + op;
+	    }
+	    case _ => {
+	      return defineSet;
+	    }
+	  }
+	}
+	
+	def use(instr: TACInstr):Set[TACOp] = {
+	  var use: Set[TACOp] = Set[TACOp]()
+	  instr match {
+	    case TAComment(comment: String, line) => { }
+
+      //Branching, control flow
+      case TAC_Label(label: String, line: Int, comment: String) => { }
+      case TAC_Jump(label: TAC_Label, line: Int, comment: String) => { }
+      case TAC_CJump(label: TAC_Label, condition: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, condition);
+      }
+      case TAC_RET(value: Option[TACOp], line: Int, comment: String) => {
+        value match {
+          case Some(x) => addIfVariable(use, x);
+          case None => {}
+        }
+      }
+      case TAC_Length(dst: TACOp, array: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, array);       
+      }
+
+      case TAC_NewClass(dst: TACOp, decl: ASTClassDecl, line: Int, comment: String) => { }
+
+      //Calls
+      case TACCall_VirCall(dst: Option[TACOp], receiver: TACOp, decl: ASTMethodDecl, paramList: List[TACOp], line: Int, comment: String) => {
+        use = addIfVariable(use, receiver);
+        for (param <- paramList) {
+          use = addIfVariable(use, param);
+        }
+      }
+      
+      case TACCall_LibCall(store: Option[TACOp], op: String, params: List[TACOp], line: Int, comment: String) => {
+        for (param <- params) {
+          use = addIfVariable(use, param);
+        }
+      }
+
+      //Movement, load store, copy
+      case TAC_Copy(dst: TACOp, src: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, src);
+      }
+      
+      case TAC_ArrayStore(array: TACOp, index: TACOp, value: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, index);
+        use = addIfVariable(use, index);
+        use = addIfVariable(use, value);
+      }
+      
+      case TAC_FieldStore(receiver: TACOp, field: ASTFieldDecl, value: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, value);
+        use = addIfVariable(use, receiver);
+      }
+      
+      case TAC_ArrayLoad(dst: TACOp, array: TACOp, index: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, array);
+        use = addIfVariable(use, index);
+      }
+      
+      case TAC_FieldLoad(dst: TACOp, receiver: TACOp, field: ASTFieldDecl, line: Int, comment: String) => {
+        use = addIfVariable(use, receiver);
+      }
+
+      //Binary operations
+      case TAC_BinOp(dst: TACOp, lExpr: TACOp, rExpr: TACOp, binop: ASTBinOp, line: Int, comment: String) => {
+        use = addIfVariable(use, lExpr);
+        use = addIfVariable(use, rExpr);
+      }
+
+      //Unops
+      case TAC_UnOp(dst: TACOp, expr: TACOp, unop: ASTUnOp, line: Int, comment: String) => {
+        use = addIfVariable(use, expr)
+      }
+
+      //Run time checks
+      case TAC_NullCheck(oject: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, oject);
+      }
+      
+      case TAC_IndexInBounds(array: TACOp, index: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, index);
+        use = addIfVariable(use, array);
+      }
+      
+      case TAC_DivBy0(divisor: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, divisor);
+      }
+      
+      case TAC_GreaterThan0(index: TACOp, line: Int, comment: String) => {
+        use = addIfVariable(use, index);
+      }
+	  }
+	  return use;
+	}
+
+	def define(instr: TACInstr): Set[TACOp] = {
+	  var defined: Set[TACOp] = Set[TACOp]()
+	  instr match {
+	    case TAComment(comment: String, line) => { }
+
+      //Branching, control flow
+      case TAC_Label(label: String, line: Int, comment: String) => { }
+      case TAC_Jump(label: TAC_Label, line: Int, comment: String) => { }
+      case TAC_CJump(label: TAC_Label, condition: TACOp, line: Int, comment: String) => { }
+      case TAC_RET(value: Option[TACOp], line: Int, comment: String) => { }
+      case TAC_Length(dst: TACOp, array: TACOp, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst);       
+      }
+
+      case TAC_NewClass(dst: TACOp, decl: ASTClassDecl, line: Int, comment: String) => { }
+
+      //Calls
+      case TACCall_VirCall(dst: Option[TACOp], receiver: TACOp, decl: ASTMethodDecl, paramList: List[TACOp], line: Int, comment: String) => {
+        dst match {
+          case Some(x) => {
+            defined = addIfVariable(defined, x);
+          }
+          case None => { }
+        }
+      }
+      
+      case TACCall_LibCall(store: Option[TACOp], op: String, params: List[TACOp], line: Int, comment: String) => {
+        store match {
+          case Some(x) => {
+            defined = addIfVariable(defined, x);
+          }
+          case None => { }
+        }
+      }
+
+      //Movement, load store, copy
+      case TAC_Copy(dst: TACOp, src: TACOp, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst); 
+      }
+      
+      case TAC_ArrayStore(array: TACOp, index: TACOp, value: TACOp, line: Int, comment: String) => { }
+      
+      case TAC_FieldStore(receiver: TACOp, field: ASTFieldDecl, value: TACOp, line: Int, comment: String) => { }
+      
+      case TAC_ArrayLoad(dst: TACOp, array: TACOp, index: TACOp, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst); 
+      }
+      
+      case TAC_FieldLoad(dst: TACOp, receiver: TACOp, field: ASTFieldDecl, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst);
+      }
+
+      //Binary operations
+      case TAC_BinOp(dst: TACOp, lExpr: TACOp, rExpr: TACOp, binop: ASTBinOp, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst); 
+      }
+
+      //Unops
+      case TAC_UnOp(dst: TACOp, expr: TACOp, unop: ASTUnOp, line: Int, comment: String) => {
+        defined = addIfVariable(defined, dst);
+      }
+
+      //Run time checks
+      case TAC_NullCheck(oject: TACOp, line: Int, comment: String) => { }
+      
+      case TAC_IndexInBounds(array: TACOp, index: TACOp, line: Int, comment: String) => { }
+      
+      case TAC_DivBy0(divisor: TACOp, line: Int, comment: String) => { }
+      
+      case TAC_GreaterThan0(index: TACOp, line: Int, comment: String) => { }
+	  }
+	  
+	  //We need to make sure the variables we added to "defined" were not used on the same instruction
+	  //This is because the used variables in an instruction will be used before we 
+	  //define them by storing them.
+
+	  return defined -- use(instr);
+	}
+}

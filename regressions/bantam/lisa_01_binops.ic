@@ -1,0 +1,16 @@
+//Output: Failed.
+//attempts to mask parameters
+
+class Test {
+  int methodTest(int a, int b) {
+    int a = 50;
+    int b = 82;
+    boolean lt = a < b;
+    boolean le = a <= b;
+    boolean gt = b > a;
+    boolean ge = b >= a;
+    
+    boolean eq = a == b;
+    boolean ne = a != b;
+  }
+}

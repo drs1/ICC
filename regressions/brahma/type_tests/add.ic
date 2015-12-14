@@ -1,0 +1,12 @@
+//output: Success.
+
+class Adder {
+    int a;
+
+    int b(int c, int d) {
+        int e = c + d;
+        c = a + e + e;
+        a = a + d + c;
+        return c;
+    }
+}

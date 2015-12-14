@@ -1,0 +1,11 @@
+//output: Failed.
+
+class N{
+      void main(string[] args){}
+
+      void a(int b){}
+      int a(){
+      	  return 0;
+	}
+
+}

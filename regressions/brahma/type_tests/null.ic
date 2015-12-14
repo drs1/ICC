@@ -1,0 +1,8 @@
+//output: Success.
+
+class Foo {
+
+    void f() {
+        Foo x = null;
+    }
+}

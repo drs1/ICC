@@ -1,0 +1,22 @@
+//output: Success.
+
+class A {}
+
+class B extends A {}
+
+class C {}
+
+class D extends C{}
+
+class DefineMethod {
+      void m(A a, C c) {}
+}
+
+class CallMethod {
+      DefineMethod methodLoc;
+      void main(string[] args) {
+      	   B b = new B();
+	   D d = new D();
+      	   methodLoc.m(b, d);
+      }
+}

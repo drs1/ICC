@@ -1,0 +1,43 @@
+class Return{
+	void m_void(){
+		return;
+	}
+
+	int m_int(int x){
+		return (1 + x - 3 * 4 * x);
+	}
+
+	Return m_Return(){
+		return this;
+	}
+
+	 void main(string[] args){
+	    (new Return()).test();
+	}
+	
+	void test() {
+		int x; int res;
+		A a;A aa;
+
+		a = new A();
+
+		aa = a.m(0);
+
+		if (aa != a)
+			Library.println("hmm?");
+
+		m_void();
+		res = m_int(2);
+		Library.printi(res); Library.println(""); //1 + 2 - 3 * 4 * 2 = 3 - 24 = -21
+		this.m_Return();
+
+		a = aa.m(0);
+	}
+}
+
+class A{
+	A m(int a){
+		return this;
+	}
+}
+

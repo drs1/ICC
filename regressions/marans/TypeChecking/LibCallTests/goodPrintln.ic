@@ -1,0 +1,7 @@
+//output: Success.
+
+class A{
+      void main(string[] args){
+      	   Library.println("Hi");
+      }
+}

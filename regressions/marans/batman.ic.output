@@ -1,0 +1,40 @@
+class A { 
+
+}
+
+class B { 
+
+}
+
+class C { 
+
+}
+
+class Batman { 
+  boolean suchALegitTest(A a;
+  , B b;
+  , C c;
+  , ){
+    
+    int i = 0+1+0*1
+    while(i<=14) {
+      
+      Library.println("na", ); 
+      if(i==14) {
+        
+        Library.println("BATMANNNNN", ); 
+        break;
+      }
+       else {
+        
+        continue;
+      }
+      
+    }
+    return true;
+    
+  }
+  
+}
+
+Success.

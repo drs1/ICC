@@ -1,0 +1,17 @@
+//output: Success.
+
+class A{
+	void main(string[] args) {
+		(new A()).doStuff();
+	}
+	
+	void doStuff() {
+		(new A()).a().b = this.b;
+	}
+	
+	A a() {
+		return this;
+	}
+	
+	A b;
+}

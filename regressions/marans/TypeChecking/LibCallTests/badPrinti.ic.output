@@ -1,0 +1,2 @@
+Library method printi expected List(ASTTypeInt(0)) found List(ASTLiteralString(Hi,5)) on line: 5
+Failed.

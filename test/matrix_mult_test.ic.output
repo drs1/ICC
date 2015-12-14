@@ -1,0 +1,168 @@
+class MatrixMult { 
+  void main(String[] args;
+  , ){
+    
+    int m;
+    int n;
+    int p;
+    int i;
+    this.printMatrix(c);
+    Library.println("Matrix C = A x B:", ); 
+    this.multiply();
+    this.printMatrix(b);
+    Library.println("Matrix B:", ); 
+    this.initMatrix(b);
+    this.printMatrix(a);
+    Library.println("Matrix A:", ); 
+    this.initMatrix(a);
+    while(i<m) {
+      
+      i = i+1;
+      c[i] = new int[p];
+      
+    }
+    i = 0;
+    c = new int[][m];
+    while(i<n) {
+      
+      i = i+1;
+      b[i] = new int[p];
+      
+    }
+    i = 0;
+    b = new int[][n];
+    while(i<m) {
+      
+      i = i+1;
+      a[i] = new int[n];
+      
+    }
+    i = 0;
+    a = new int[][m];
+    if(p<1) {
+      
+      Library.exit(1, ); 
+      Library.println("Invalid value for parameter `p'", ); 
+      
+    }
+    if(n<1) {
+      
+      Library.exit(1, ); 
+      Library.println("Invalid value for parameter `n'", ); 
+      
+    }
+    if(m<1) {
+      
+      Library.exit(1, ); 
+      Library.println("Invalid value for parameter `m'", ); 
+      
+    }
+    p = Library.stoi(args[2], 0, ); 
+    ;
+    n = Library.stoi(args[1], 0, ); 
+    ;
+    m = Library.stoi(args[0], 0, ); 
+    ;
+    if(args.length!=3) {
+      
+      Library.exit(1, ); 
+      Library.println("Invalid number of parameters.", ); 
+      
+    }
+    
+  }
+  void printMatrix(int[][] m;
+  , ){
+    
+    int i;
+    int j;
+    Library.print("
+    ", ); 
+    while(i<m.length) {
+      
+      i = i+1;
+      Library.print("
+      ", ); 
+      while(j<m[i].length) {
+        
+        j = j+1;
+        Library.print(" ", ); 
+        Library.printi(m[i][j], ); 
+        
+      }
+      j = 0;
+      
+    }
+    i = 0;
+    
+  }
+  void initMatrix(int[][] m;
+  , ){
+    
+    int i;
+    int j;
+    while(i<m.length) {
+      
+      i = i+1;
+      while(j<m[i].length) {
+        
+        j = j+1;
+        m[i][j] = Library.random(m.length*2, ); 
+        ;
+        
+      }
+      j = 0;
+      
+    }
+    i = 0;
+    
+  }
+  void multiply(){
+    
+    int i;
+    int j;
+    int k;
+    while(i<a.length) {
+      
+      i = i+1;
+      while(j<c[i].length) {
+        
+        j = j+1;
+        while(k<a[i].length) {
+          
+          k = k+1;
+          c[i][j] = c[i][j]+a[i][k]*b[k][j];
+          
+        }
+        k = 0;
+        c[i][j] = 0;
+        
+      }
+      j = 0;
+      
+    }
+    i = 0;
+    
+  }
+  int[][] a;
+  
+  int[][] b;
+  
+  int[][] c;
+  
+
+}
+
+-----------------------
+multiply
+0
+-----------------------
+initMatrix
+1
+-----------------------
+printMatrix
+2
+-----------------------
+main
+3
+Success.

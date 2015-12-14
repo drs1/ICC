@@ -1,0 +1,9 @@
+//output: Failed.
+
+class CatCat {
+    int foofoo() {
+        int meowmeow;
+        donkey = 2 * 7 + !5;
+        int kong;
+    }
+}

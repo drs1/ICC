@@ -1,0 +1,20 @@
+class A { 
+  void m(){
+    
+    int i;
+    i = 5;
+    while(i<10) {
+      
+      Library.println("Hi", ); 
+      if(i==8) {
+        
+        break;
+      }
+      
+    }
+    
+  }
+  
+}
+
+Success.

@@ -1,0 +1,23 @@
+class A { 
+  void m(){
+    
+    
+  }
+  
+}
+
+class B extends A { 
+
+}
+
+class C { 
+  void m2(B b;
+  , ){
+    
+    b.m();
+    
+  }
+  
+}
+
+Success.

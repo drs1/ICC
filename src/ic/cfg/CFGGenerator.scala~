@@ -1,0 +1,142 @@
+package ic.cfg
+
+import ic.tac._
+import ic.ast._
+import ic.error.SemanticError
+
+class CFGGenerator(prog: ASTProgram) {
+   var cfg = new ControlFlowGraph;
+   var isMain: Boolean = false;
+  
+   def makeCFG(): ControlFlowGraph = {
+     //Checks for a main method and sets enter and exit for cfg
+     for(cls <- prog.classes){
+       for(decl <- cls.decls){
+         decl match {
+           case md: ASTMethodDecl => {
+             if(md.id.equals("main")){
+               if(!isMain){
+                 isMain = true;
+                 addMain(md.tacList);
+               } else {
+                 throw new SemanticError("More than one main method found in file.");
+               }
+             }
+           }
+           case fd: ASTFieldDecl => {}
+         }
+       }
+     }
+     if(!isMain){
+       throw new SemanticError("No main method found in file.");
+     }
+     
+     //adds rest of the methods to the cfg
+     for(cls <- prog.classes){
+       for(decl <- cls.decls){
+         decl match {
+           case md: ASTMethodDecl => {
+             if(!md.id.equals("main")){
+               addMethod(md.tacList);
+             }
+           }
+           case fd: ASTFieldDecl => {}
+         }
+       }
+     }
+     return cfg;
+   }
+   
+   def addMain(tacList: TACList): Unit = {
+    //Set the first instruction block as the enter
+    val start = cfg.newBlock(tacList.list.head);
+    cfg.setEnter(start);
+    var current: BasicBlock = start;
+    
+    //create blocks for all tac instructions
+    for(instr <- tacList.list.tail) { 
+      current = cfg.newBlock(instr)
+    }
+    //Set the last instruction block as the exit
+    cfg.setExit(current);
+    
+    var previous : Option[BasicBlock] = None;
+    
+    //Add in edges on jumps and returns
+    for(instr <- tacList.list){
+      
+      //if there is a previous block, add the edge from that block to this one
+      val cur = cfg.getBlock(instr)
+      previous match {
+        case Some(x) => x.addEdge(cur)
+        case None => {}
+      }
+      
+      instr match {
+        case j @ TAC_Jump(label: TAC_Label, line: Int, comment: String) => {
+          val destination = cfg.getBlock(label)
+          cur.addEdge(destination);
+          previous = None
+        }
+        case cj @ TAC_CJump(label: TAC_Label, condition: TACOp, line: Int, comment: String) => {
+          val takeJump = cfg.getBlock(label)
+          cur.addEdge(takeJump)
+          previous = Some(cur)
+          //previous gets assigned because we could have not executed the jump
+        }
+        
+        case tr @ TAC_RET(value: Option[TACOp], line: Int, comment: String) => {
+          cfg.getBlock(tr).addEdge(cfg.getExit())
+          previous = None
+        }
+        
+        case other @ _ => {
+          previous = Some(cur);
+        }
+      }
+    }
+   }
+  
+   def addMethod(tacList: TACList): Unit = {
+    //create blocks for all tac instructions
+    for(instr <- tacList.list) { 
+      cfg.newBlock(instr)
+    }
+    
+    var previous : Option[BasicBlock] = None;
+    
+    //Add in edges on jumps and returns
+    for(instr <- tacList.list){
+      
+      //if there is a previous block, add the edge from that block to this one
+      val cur = cfg.getBlock(instr)
+      previous match {
+        case Some(x) => x.addEdge(cur)
+        case None => {}
+      }
+      
+      instr match {
+        case j @ TAC_Jump(label: TAC_Label, line: Int, comment: String) => {
+          val destination = cfg.getBlock(label)
+          cur.addEdge(destination);
+          previous = None
+        }
+        case cj @ TAC_CJump(label: TAC_Label, condition: TACOp, line: Int, comment: String) => {
+          val takeJump = cfg.getBlock(label)
+          cur.addEdge(takeJump)
+          previous = Some(cur)
+          //previous gets assigned because we could have not executed the jump
+        }
+        
+        case tr @ TAC_RET(value: Option[TACOp], line: Int, comment: String) => {
+          cfg.getBlock(tr).addEdge(cfg.getExit())
+          previous = None
+        }
+        
+        case other @ _ => {
+          previous = Some(cur);
+        }
+      }
+    }
+   }
+}

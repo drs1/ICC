@@ -1,0 +1,12 @@
+class A { 
+  void f(int x;
+  , ){
+    
+    int x = 1
+    
+  }
+  
+}
+
+Vairable x already defined as a formal parameter
+Failed.

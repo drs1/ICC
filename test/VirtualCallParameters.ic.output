@@ -1,0 +1,32 @@
+class A { 
+  void f(int i;
+  , boolean b;
+  , String s;
+  , ){
+    
+    
+  }
+  
+}
+
+class B { 
+  void g(int x;
+  , ){
+    
+    boolean beta;
+    String stringy;
+    A instanceOfA = new A ()
+    instanceOfA.f(xbetastringy);
+    
+  }
+  
+}
+
+-----------------------
+f
+0
+-----------------------
+g
+0
+No main method found in the file.
+Failed.

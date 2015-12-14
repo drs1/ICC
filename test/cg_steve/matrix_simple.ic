@@ -1,0 +1,82 @@
+//~~~Success.
+class MatrixMult {
+    int[][] a;
+    int[][] b, c;
+    
+    void multiply(){
+    	int i, j, k;
+	i = 0;
+	while(i < a.length){
+	    j = 0;
+	    while(j < c[i].length){
+	        c[i][j] = 0;
+	        k = 0;
+		while(k < a[i].length){
+	            c[i][j] = c[i][j] + a[i][k] * b[k][j];
+		    k = k + 1;
+	        }
+		j = j + 1;
+	    }
+	    i = i + 1;
+	}
+    }
+
+    void initMatrix(int[][] m) {
+	int i, j;
+	i = 0;
+	while(i < m.length){
+	    j = 0;
+	    while(j < m[i].length){
+	    	m[i][j] = Library.random(m.length*2);
+	        j = j + 1;
+	    }
+	    i = i + 1;
+	}
+    }
+
+    void printMatrix(int[][] m) {
+	int i, j;
+	i = 0;
+	while(i < m.length) {
+	    j = 0;
+	    while(j< m[i].length){
+	        Library.printi(m[i][j]);
+	        Library.print(" ");
+	        j = j + 1;
+	    }
+	    Library.print("\n");
+	    i = i + 1;
+	}
+	Library.print("\n");
+    }
+
+    void main(string[] args) {
+	int m, n, p;
+	int i;
+
+	m = 10;
+	n = 20;
+	p = 10;
+
+	a = new int[][m];
+	i = 0;
+	while(i < m){
+	    a[i] = new int[n];
+	    i = i + 1;
+	}
+	
+	b = new int[][n];
+	i = 0;
+	while(i < n){
+	    b[i] = new int[p];
+	    i = i + 1;
+	}
+	
+	Library.println("Matrix A:");
+	printMatrix(a);
+	Library.println("Matrix B:");
+	printMatrix(b);
+	Library.println("Matrix C = A x B:");
+	printMatrix(c);
+    }
+}

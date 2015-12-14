@@ -1,0 +1,12 @@
+//output: Failed.
+
+class Subber {
+    int s;
+
+    int j(int k, bool l, string m) {
+        s = s - k;
+        j = s - l;
+        j = s - m;
+        return j;
+    }
+}

@@ -1,0 +1,10 @@
+class Test { 
+  void methodTest(){
+    
+    int i = 0
+    
+  }
+  
+}
+
+Success.

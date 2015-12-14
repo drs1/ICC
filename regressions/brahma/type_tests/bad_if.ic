@@ -1,0 +1,9 @@
+//output: Failed.
+
+class BadIf {
+    void f() {
+        if (2) {
+            int y = 77;
+        }
+    }
+}

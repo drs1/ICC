@@ -1,0 +1,6 @@
+//Output: Success.
+class A {
+      void f(string a, string b, string c) {
+        boolean bb = a == b || c == b;
+      }
+}

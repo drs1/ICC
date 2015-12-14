@@ -1,0 +1,8 @@
+//output: Failed.
+
+class Cat {
+
+    void foo(int x) {
+        char x = 5;
+    }
+}

@@ -1,0 +1,26 @@
+class List { 
+  List next;
+  
+  int data;
+  
+
+}
+
+class Node { 
+  Edge[] edges;
+  
+  int data;
+  
+
+}
+
+class Edge { 
+  Node dest;
+  
+  int label;
+  
+
+}
+
+No main method found in the file.
+Failed.

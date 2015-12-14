@@ -1,0 +1,2 @@
+Library method print expected List(ASTTypeString(0)) found List(ASTLiteralBool(true,5)) on line: 5
+Failed.

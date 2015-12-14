@@ -1,0 +1,11 @@
+//output: Success.
+
+class Sup {
+      int s;
+}
+
+class Sub extends Sup {
+      void foo() {
+      	   s = 2;
+	}
+}

@@ -1,0 +1,7 @@
+//Output: Failed.
+
+class Test {
+      void methodTest(int a, int b) {
+      	   int a = 5;
+      }
+}     

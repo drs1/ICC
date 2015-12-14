@@ -1,0 +1,9 @@
+//output: Success.
+
+class C {
+    int z;
+    void f() {
+        int z = 2;
+        this.z = z;
+    }
+}

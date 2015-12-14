@@ -1,0 +1,37 @@
+//output: Success.
+
+class Math {
+       	void addStuff() {
+	      	int a = 1 + 2;
+	}
+	void addNegative() {
+		int b = 3+(-2);
+	}
+	int subtractStuff() {
+		return 3-2;
+	}
+	int subtractNegative() {
+		return 3-(-2);
+	}
+	void subtractAgain() {
+		int c = 3-4;
+	}
+	void multStuff() {
+		int d = 3*4;
+	}
+	int multNegative() {
+		return 3*(-4);
+	}
+	int divStuff() {
+		return 6/3;
+	}
+	void divNegative() {
+		int e = 6/(-3);
+	}
+	int modStuff() {
+		return 6%3;
+	}
+	void modMore() {
+		int f = 6%5;
+	}
+}

@@ -1,0 +1,5 @@
+//Output: Failed.
+
+class A extends A {
+  int i;
+}

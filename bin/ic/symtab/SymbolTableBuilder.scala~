@@ -1,0 +1,66 @@
+package ic.symtab;
+import ic.ast._;
+import ic.error._;
+
+object SymbolTableBuilder {
+  def buildSymbols(current: SymbolTable, node: ASTNode): Unit ={
+    node.symtab = current;
+    node match{
+      case n: ASTProgram => {
+	for(classDecl <- n.classes){
+	  buildSymbols(current, classDecl);
+	}
+      }
+
+      case n: ASTClassDecl => {
+	current.add(n.cls_id, n);
+	val parent = n.ext match{
+	  case Some(x) => {
+	    x.decl = current.getClassDecl(x.cls_id) match{
+	      case Some(x) => x;
+	      case None => throw new SemanticError("Couldn't resolve extended class "+n.cls_id+" on line "+n.line);
+	    }
+	    x.decl.bodyScope;
+	  }
+	  case None => current
+	}
+	n.bodyScope = new SymbolTable("Class Decl"+ n.cls_id, Some(parent));
+
+	for(decl <- n.decls) {
+	  buildSymbols(n.bodyScope, decl);
+	}
+      }
+      
+      case n: ASTMethodDecl => {
+        current.add(n.id, n);
+	val scope = new SymbolTable(n.id + "Method Decl", Some(current));
+	for(formal <- n.forms) {
+	  buildSymbols(scope, formal);
+	}
+	buildSymbols(scope, n.block);
+      }
+
+      case n: ASTFieldDecl => {
+	for(id <- n.id_list)
+	  current.add(id, n);
+      }
+
+      case n: ASTFormal => {
+	 current.add(n.id, n);
+      }
+      case n: ASTBlock => {
+	val scope = new SymbolTable("Block at line "+n.line, Some(current));
+	for(varDecl <- n.decls){
+	  buildSymbols(scope, varDecl);
+	}
+	for(stmtDecl <- n.stmts){
+	  buildSymbols(scope, stmtDecl);
+	}
+      }
+      case n: ASTVarDecl => {
+	current.add(n.id, n);
+      }
+      case _ => {}
+    }
+  }
+}

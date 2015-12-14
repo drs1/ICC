@@ -1,0 +1,36 @@
+//output: Success.
+
+class A {
+      void main(string[] args) {
+      	   if (args.length > 0) {
+	      int i;
+	      i = 0;
+	      while (i < args.length) {
+	      	    Library.println(args[i]);
+	      } 
+	   }
+      }
+      int someMethod() {
+      	   return 1;
+      }
+}
+
+class B extends A {
+      void main(string[] args) {
+      	   A testClass = new A();
+	   testClass.someMethod();
+      }
+}
+
+class C extends B {
+      int a,b,c;
+      string s;
+      void main(string[] args) {
+      	   s = "Hello";
+	   getString();
+      }
+      string getString() {
+      	     string s2 = " ", s3 = "World", s4 = "!";
+      	     return s + s2 + s3 + s4;
+      }
+}

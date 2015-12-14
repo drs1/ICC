@@ -1,0 +1,31 @@
+class TestClass { 
+  String println(String s;
+  , ){
+    
+    {
+      
+      int i = 0
+      String s = "test"
+      
+    }
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+class TestClass2 { 
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+Vairable s already defined as a formal parameter
+Failed.

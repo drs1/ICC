@@ -1,0 +1,6 @@
+//Output: Failed.
+class A {
+      void m2(){
+      	   int x = m2();
+}
+}

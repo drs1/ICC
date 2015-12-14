@@ -1,0 +1,2 @@
+Can't apply binary == to types ASTTypeInt(10) and ASTTypeString(10) on line: 10
+Failed.

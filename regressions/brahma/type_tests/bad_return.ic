@@ -1,0 +1,8 @@
+//output: Failed.
+
+class Bad {
+
+    int foo() {
+        return true;
+    }
+}

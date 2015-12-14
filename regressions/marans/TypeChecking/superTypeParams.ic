@@ -1,0 +1,22 @@
+//output: Failed.
+
+class A {}
+
+class B extends A {}
+
+class C {}
+
+class D extends C{}
+
+class DefineMethod {
+      void m(B b, D d) {}
+}
+
+class CallMethod {
+      DefineMethod d;
+      void main(string[] args) {
+      	   A a = new A();
+	   C c = new C();
+      	   d.m(a, c);
+      }
+}

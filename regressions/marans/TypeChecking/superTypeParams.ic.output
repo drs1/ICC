@@ -1,0 +1,2 @@
+Parameter ASTTypeClass(A,18) is not a subtype of ASTTypeClass(B,12) on line 20
+Failed.

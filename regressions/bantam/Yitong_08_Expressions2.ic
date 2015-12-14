@@ -1,0 +1,11 @@
+//Output: Success.
+class Friends{}
+class Tea extends Friends{
+      /*Hello! */
+      boolean s;
+      void method(int stuf, string bobs, boolean stuff){
+      	  int s = Library.stoi("123",3);
+	  return;
+      }
+      int is;
+}

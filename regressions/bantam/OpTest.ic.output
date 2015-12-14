@@ -1,0 +1,13 @@
+class A { 
+  void f(String a;
+  , String b;
+  , String c;
+  , ){
+    
+    boolean bb = a==b||c==b
+    
+  }
+  
+}
+
+Success.

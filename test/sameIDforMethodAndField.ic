@@ -1,0 +1,6 @@
+//output: Success.
+
+class A {
+	int f;
+	void f() { }
+}

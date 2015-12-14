@@ -1,0 +1,28 @@
+class LotsOScope { 
+  void hello(int world;
+  , ){
+    
+    int x;
+    int y;
+    {
+      
+      int z;
+      while(z>0) {
+        
+        this.goodbye(2);
+        break;
+      }
+      
+    }
+    
+  }
+  int goodbye(int world;
+  , ){
+    
+    return world;
+    
+  }
+  
+}
+
+Success.

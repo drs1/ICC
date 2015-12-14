@@ -1,0 +1,10 @@
+//output: Failed.
+
+class A {
+      void badIf(){
+      	   if{
+				//no parens
+	   	   }else{
+	  	   }
+      }
+}

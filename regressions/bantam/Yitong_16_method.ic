@@ -1,0 +1,9 @@
+//Output: Failed.
+
+class B{
+      void method(int b, int c, boolean s) { }
+}
+
+class A extends B{
+      void method(int b, int c) { }
+}

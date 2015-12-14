@@ -1,0 +1,18 @@
+//output: Success.
+class TestClass2{
+      void main(string[] args){
+
+      }
+}
+
+class TestClass{
+      void main(string[] args){
+            TestClass2 tc = new TestClass2();      	   
+      }     
+
+      string println(string s){
+	int i = 0;
+	string t = "test";
+      }	
+}
+

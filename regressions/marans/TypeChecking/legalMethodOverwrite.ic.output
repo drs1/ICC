@@ -1,0 +1,22 @@
+class A { 
+  void m(String s;
+  , int[] array;
+  , ){
+    
+    
+  }
+  
+}
+
+class B extends A { 
+  void m(String s;
+  , int[] a;
+  , ){
+    
+    Library.print(s, ); 
+    
+  }
+  
+}
+
+Success.

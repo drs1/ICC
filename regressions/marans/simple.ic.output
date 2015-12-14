@@ -1,0 +1,24 @@
+class A { 
+  int x,;
+  
+  int y,;
+  
+  String c,;
+  
+  int x(int y;
+  , String s;
+  , ){
+    
+    return y;
+    
+  }
+  
+}
+
+class B extends A { 
+  boolean b,;
+  
+
+}
+
+Success.

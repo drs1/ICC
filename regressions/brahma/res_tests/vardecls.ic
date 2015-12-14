@@ -1,0 +1,9 @@
+//output: Failed.
+
+class Foo {
+
+    int foo() {
+        int y = 2;
+        int x = y;
+    }
+}

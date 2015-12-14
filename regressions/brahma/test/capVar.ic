@@ -1,0 +1,7 @@
+//output: Failed.
+class Cat {
+
+    void foo() {
+        int Rol;
+    }
+}

@@ -1,0 +1,15 @@
+class A { 
+  void f(){
+    
+    
+  }
+  int f;
+  
+
+}
+
+-----------------------
+f
+0
+No main method found in the file.
+Failed.

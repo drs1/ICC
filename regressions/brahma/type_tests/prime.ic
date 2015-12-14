@@ -1,0 +1,25 @@
+//output: Success.
+
+class Prime {
+
+    boolean isPrime(int n) {
+        int i = 2;
+        while( i * i <= n) {
+            if (n % i == 0) {
+                return false;
+            }
+            i = i + 1;
+        }
+        return true;
+    }
+    void main() {
+
+        int p = 2;
+        while ( p < 1000) {
+            if (isPrime(p)) {
+                Library.println(Library.itos(p));
+            }
+            p = p + 1;
+        }
+    }
+}

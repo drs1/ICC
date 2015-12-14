@@ -1,0 +1,7 @@
+//output: Failed.
+
+class Pokemon {
+      void gottaCatchEm(){
+      	   int all = 150
+	}
+}

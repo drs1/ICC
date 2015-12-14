@@ -1,0 +1,11 @@
+class A { 
+  void main(String[] args;
+  , ){
+    
+    Library.println("Hi", ); 
+    
+  }
+  
+}
+
+Success.

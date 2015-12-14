@@ -1,0 +1,2 @@
+Can't apply binary plus to types ASTTypeInt(5) and ASTTypeString(5) on line: 6
+Failed.

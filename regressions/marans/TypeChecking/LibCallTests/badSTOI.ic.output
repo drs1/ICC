@@ -1,0 +1,2 @@
+Library method stoi expected List(ASTTypeString(0), ASTTypeInt(0)) found List(ASTLiteralInt(5,5), ASTLiteralString(hi,5)) on line: 5
+Failed.

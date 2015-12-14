@@ -1,0 +1,9 @@
+We create control flow graphs for every set of tac instructions by making each
+instruction a basic block and adding the edges for jumps, etc.
+
+We then perform Live Variable analysis by defining def and use functions for each block.
+We use these to implement the transfer function for blocks in live variable analysis.
+
+In reaching copies analysis, we use a map to store the source and destination operations
+for each copy (instead of a set of tuples).  Every time we find a reassigned copy to a destination,
+we remove it from the map and replace it with the new source.

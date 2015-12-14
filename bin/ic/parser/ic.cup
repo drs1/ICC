@@ -1,0 +1,238 @@
+package ic.parser;
+
+import ic.error.*;
+import ic.ast.*;
+import java_cup.runtime.*;
+import scala.Option;
+import ic.ParserUtil;
+import scala.collection.*;
+import scala.collection.immutable.*;
+
+action code {:
+
+/* Any extra data structures used by your production actions */
+
+/* Helper methods used in your actions. */
+
+
+
+:}
+
+parser code {:
+
+/* Throw a syntax error with they line and token */
+
+public void syntax_error(Symbol cur_token) {
+    throw new SyntaxError(cur_token, "Error occurred at line:"+cur_token.left+" on symbol \""+cur_token+"\" symbol type: "+cur_token.sym);
+}
+
+:}
+
+/* Terminals */
+terminal  CLASS, RETURN, THIS, IF, EXTENDS, NEW, VOID, ELSE, LENGTH;
+terminal  INT, BOOLEAN, STRING, BREAK, CONTINUE;
+terminal  WHILE, NULL, OBRACE;
+terminal  CBRACE, OPAREN, CPAREN, COMMA, SEMI, OBRACKET, CBRACKET, EQ;
+terminal  DOT, PLUS, MINUS, MULT, DIV, LIBRARY;
+terminal  MOD, AND, OR, NOT, LT, LE, GT, GE, EQEQ, NE;
+terminal  String ID, CLS_ID, STRING_LIT;
+terminal  Integer INT_LIT;
+terminal  Boolean  BOOL_LIT;
+
+/* Nonterminals */
+nonterminal  ASTProgram		        Program;
+nonterminal  List<ASTClassDecl>		ClassDeclList;
+nonterminal  ASTClassDecl	       	ClassDecl;
+nonterminal  ASTFieldDeclWithList		 	FieldDecl;
+nonterminal  ASTDecl			MethodDecl;
+nonterminal  List<ASTVarDecl>		Formals;
+
+nonterminal  ASTType			Type;
+nonterminal  ASTBlock 			Block;
+
+nonterminal  List<ASTVarDecl>		VarDeclList;
+nonterminal  List<ASTPartialVarDecl>	IdExprList;
+nonterminal  scala.Option<ASTExpr>	OptEQExpr;
+
+
+nonterminal  ASTStmt 			Stmt;
+nonterminal  ASTExpr			Expr;
+nonterminal  ASTCall			Call;
+nonterminal  ASTLibCall			LibCall;
+nonterminal  ASTVirtualCall		VirtualCall;
+nonterminal  ASTLoc				Location;
+nonterminal  ASTLiteral			Literal;
+nonterminal  scala.Option<ASTTypeClass>	OpExtend;
+nonterminal  List<String>		IDList;
+nonterminal  List<ASTDecl>		FBarM;
+nonterminal  List<ASTDecl>		FBarMList;
+
+nonterminal  List<ASTStmt>		StmtList;
+nonterminal  scala.Option<ASTExpr>	OptExpr;
+nonterminal  scala.Option<ASTStmt>      OptElseStmt;
+nonterminal  List<ASTExpr>		ExprList;
+nonterminal  List<List<ASTVarDecl>>     VarDeclLists;
+
+precedence right EQ;
+precedence left OR;
+precedence left AND;
+precedence left EQEQ, NE;
+precedence left LT, LE, GT, GE;
+precedence left PLUS, MINUS;
+precedence left MULT, DIV, MOD;
+precedence right NOT;
+precedence left DOT, OBRACKET, OPAREN;
+
+//Must be last to avoid conflicts with if then statements
+//else must have a higher precedence than the follow set of then
+precedence left ELSE;
+
+/* The grammar */
+Program	         ::=	ClassDeclList: cl	{: RESULT = new ASTProgram(cl, clleft); :}
+		   ;
+		
+ClassDeclList  	 ::=    ClassDecl: cd ClassDeclList: cdList	{: RESULT = ParserUtil.cons(cd,cdList); :}  
+		   |						{: List<ASTClassDecl> temp = ParserUtil.empty(); RESULT = temp; :}
+		   ; 
+									
+ClassDecl      	 ::=    CLASS CLS_ID:c_id OpExtend: ext OBRACE FBarMList: fbarmList CBRACE	{: RESULT = new ASTClassDecl(c_id, ext, fbarmList, c_idleft); :}
+ 	    	   ;
+
+FBarMList        ::=	FBarM: decl  FBarMList: l 	{: RESULT = ParserUtil.appendAll(decl,l); :} 			
+	           |					{: List<ASTDecl> temp = ParserUtil.empty(); RESULT = temp; :}
+		   ;
+		   
+		   
+/* this now returns a list of decls */				    			     
+FBarM		 ::= 	FieldDecl: f		{: RESULT = f.toDecls(); /* converts decl with list to list of decls */ :}
+	           | 	MethodDecl: m		{: RESULT = ParserUtil.empty(); RESULT = ParserUtil.cons(m, RESULT); :}
+		   ;
+							
+OpExtend      	 ::=    EXTENDS CLS_ID: c_id	{: RESULT = ParserUtil.some(new ASTTypeClass(c_id, c_idleft)); :}
+		   |				{: RESULT = ParserUtil.<ASTTypeClass>none(); :}  
+		   ;   
+		   
+/* build a field decl with a list */									
+FieldDecl      	 ::=  	Type: t  IDList: l SEMI	{: RESULT = new ASTFieldDeclWithList(t, l, tleft); :}
+	           ;
+
+IDList        	 ::=  	ID: id COMMA IDList: idList	{: RESULT = ParserUtil.append(idList, id); :}
+		   |	   		ID: id		{: List<String> l = ParserUtil.empty(); RESULT = ParserUtil.append(l, id); :}
+	    	   ;
+					
+MethodDecl    	 ::=   	Type: t ID: id OPAREN Formals: f CPAREN Block: b 	{: RESULT = new ASTMethodDecl(t, id, f, b, tleft); :}
+		   |	VOID ID: id OPAREN Formals: f CPAREN Block: b    	{: RESULT = new ASTMethodDecl(new ASTTypeVoid(idleft), id, f, b, idleft); :}
+		   ;
+
+		
+Formals       	 ::=    Type:t ID: id				{:
+									List<ASTVarDecl> fl = ParserUtil.empty();
+						   			ASTVarDecl f = new ASTVarDecl(t, id, ParserUtil.<ASTExpr>none(), true, idleft);												                                                                    RESULT = ParserUtil.append(fl, f);						                 						                                                        :}
+
+                   | 	Formals: fl COMMA Type: t ID: id		{: ASTVarDecl f = new ASTVarDecl(t, id, ParserUtil.<ASTExpr>none(), true, tleft); RESULT = ParserUtil.append(fl, f); :}
+                   |							{: List<ASTVarDecl> temp = ParserUtil.empty(); RESULT = temp; :}
+		   ;
+					
+Type         	 ::=    INT: n			   {: RESULT = new ASTTypeInt(nleft); :}
+                   | 	BOOLEAN: n 		   {: RESULT = new ASTTypeBool(nleft); :}
+		   |	STRING: n 		   {: RESULT = new ASTTypeString(nleft); :}
+		   |	CLS_ID: n 		   {: RESULT = new ASTTypeClass(n, nleft); :}
+		   |	Type: n OBRACKET CBRACKET  {: RESULT = new ASTTypeArray(n, nleft); :}
+		   ;
+					
+Block          	 ::=   	OBRACE VarDeclLists: v StmtList: s CBRACE	{: RESULT = new ASTBlock(ParserUtil.flattenList(v), s, vleft); :}
+		   ;
+		   
+VarDeclLists     ::=    VarDeclList: l  VarDeclLists: lists		{: RESULT = ParserUtil.append(lists, l); :}
+         	   | 							{: RESULT = ParserUtil.empty(); :}
+		   ;
+
+VarDeclList      ::=	Type: t IdExprList: l SEMI			{: List<ASTVarDecl> varDeclList = ParserUtil.createVarDeclList(l, t);
+		 		      		      			   RESULT = varDeclList; :}
+		   ;
+                            
+IdExprList       ::=	ID: id OptEQExpr: e				{: List<ASTPartialVarDecl> l = ParserUtil.empty(); 
+		 		       		   			   ASTPartialVarDecl p = new ASTPartialVarDecl(id,e, idleft);
+									   RESULT = ParserUtil.append(l,p); :} 									
+	           |  	ID: id OptEQExpr: e COMMA IdExprList: l		{: ASTPartialVarDecl p = new ASTPartialVarDecl(id, e, idleft);
+		   		       		    	  	      	   RESULT = ParserUtil.append(l,p); :}
+		   ;
+					
+OptEQExpr     	 ::=   	EQ Expr: n 		{: RESULT = ParserUtil.some(n); :}
+		   |	   			{: RESULT = ParserUtil.<ASTExpr>none(); :}
+		   ;
+					
+StmtList      	 ::=  	Stmt: s StmtList: stmtList	{: RESULT = ParserUtil.cons(s, stmtList); :}
+	           | 					{: RESULT = ParserUtil.empty(); :}
+                   ;
+				
+Stmt          	 ::=   	Location: l EQ Expr: e SEMI				{: RESULT = new ASTStmtLoc(l, e, lleft); :}
+                   |   	Call: c SEMI   	       					{: RESULT = new ASTStmtCall(c, cleft); :}
+                   |   	RETURN OptExpr: oe SEMI					{: RESULT = new ASTStmtRet(oe, oeleft); :}
+                   |   	IF OPAREN Expr: e CPAREN Stmt: s OptElseStmt: oes	{: RESULT = new ASTStmtIf(e, s, oes, eleft); :}
+                   |   	WHILE OPAREN Expr: e CPAREN Stmt: s	      		{: RESULT = new ASTStmtWhile(e, s, eleft); :}
+                   |   	BREAK: b SEMI   	     	    	  		{: RESULT = new ASTStmtBreak(bleft); :}
+                   |   	CONTINUE: c SEMI					{: RESULT = new ASTStmtCont(cleft); :}
+                   |   	Block: block						{: RESULT = new ASTStmtBlock(block, blockleft); :}
+                   ;
+                	
+OptExpr          ::=   	Expr: expr	{: RESULT = ParserUtil.some(expr); :}
+		   | 		     	{: RESULT = ParserUtil.<ASTExpr>none(); :}
+	           ;
+					
+OptElseStmt      ::=   ELSE Stmt: s	{: RESULT = ParserUtil.some(s); :}
+		   | 		     	{: RESULT = ParserUtil.<ASTStmt>none(); :}
+		   ;
+					
+Expr          	 ::=   Location: l				{: RESULT = l; :}						
+                   |   Call: c	  				{: RESULT = c; :}
+                   |   THIS: t					{: RESULT = new ASTVarAccess("this", tleft); :}
+                   |   NEW CLS_ID: cls_id OPAREN CPAREN		{: RESULT = new ASTExprNewClass(cls_id, cls_idleft); :}
+                   |   NEW Type: t OBRACKET Expr: expr CBRACKET	{: RESULT = new ASTExprArray(t, expr, exprleft); :} 
+                   |   Expr: expr DOT LENGTH 	       		{: RESULT = new ASTExprLen(expr, exprleft); :}
+                   |   Expr: lexpr PLUS: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinPlus(), rexpr, opleft); :}
+                   |   Expr: lexpr MULT: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinMult(), rexpr, opleft); :}
+                   |   Expr: lexpr DIV: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinDiv(), rexpr, opleft); :}
+                   |   Expr: lexpr MINUS: op Expr: rexpr		{: RESULT = new ASTExprBinop(lexpr, new BinMinus(), rexpr, opleft); :}
+                   |   Expr: lexpr MOD: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinMod(), rexpr, opleft); :}
+                   |   Expr: lexpr AND: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinAnd(), rexpr, opleft); :}
+                   |   Expr: lexpr OR: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinOr(), rexpr, opleft); :}
+                   |   Expr: lexpr LT: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinLt(), rexpr, opleft); :}
+                   |   Expr: lexpr LE: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinLe(), rexpr, opleft); :}
+                   |   Expr: lexpr GT: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinGt(), rexpr, opleft); :}
+                   |   Expr: lexpr GE: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinGe(), rexpr, opleft); :}
+                   |   Expr: lexpr EQEQ: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinEqeq(), rexpr, opleft); :}
+                   |   Expr: lexpr NE: op Expr: rexpr			{: RESULT = new ASTExprBinop(lexpr, new BinNe(), rexpr, opleft); :}
+                   |   MINUS: op Expr: expr   	 			{: RESULT = new ASTExprUnop(new UnNeg(), expr, opleft); :}
+                   |   NOT: op Expr: expr   	 			{: RESULT = new ASTExprUnop(new UnNot(), expr, opleft); :}
+                   |   Literal: l					{: RESULT = l; :}
+                   |   OPAREN Expr: expr CPAREN				{: RESULT = expr; :}
+                   ;
+                	
+Call          	 ::=   LibCall: lc	{: RESULT = lc; :}
+		   |   VirtualCall: vc	{: RESULT = vc; :}
+		   ;
+					
+LibCall          ::=   LIBRARY DOT ID: id OPAREN ExprList: el CPAREN	{: RESULT = new ASTLibCall(id, el, idleft); :} 
+		   ;
+
+VirtualCall      ::=   Expr: expr DOT ID:id OPAREN ExprList: exprList CPAREN      {: RESULT = new ASTVirtualCall(expr, id, exprList, idleft); :}
+         	    |  ID: id OPAREN ExprList: exprList CPAREN        {: RESULT = new ASTVirtualCall(new ASTVarAccess("this", idleft), id, exprList, idleft); :}
+		    ;
+					
+ExprList      	  ::=  Expr: ex					 {: List<ASTExpr> temp = ParserUtil.empty();  RESULT = ParserUtil.append(temp, ex); :}
+		    |  ExprList: exprList COMMA Expr: expr	 {: RESULT = ParserUtil.append(exprList, expr); :} 
+		    |  		 	  	      		 {: List<ASTExpr> l = ParserUtil.empty(); RESULT = l; :}
+         	    ;
+					
+Location      	  ::=  ID: id				       {: RESULT = new ASTVarAccess(id, idleft); :}
+                    |  Expr: reciever DOT ID: id   	       {: RESULT = new ASTFieldAccess(reciever, id, idleft); :}
+         	    |  Expr:array OBRACKET Expr:index CBRACKET {: RESULT = new ASTArrayAccess(array, index, arrayleft); :}
+		    ;   
+                	
+Literal           ::=  INT_LIT: n	      {: RESULT = new ASTLiteralInt(n, nleft); :}
+                    |  STRING_LIT: n          {: RESULT = new ASTLiteralString(n, nleft); :}
+                    |  BOOL_LIT: n            {: RESULT = new ASTLiteralBool(n, nleft); :}
+                    |  NULL: n                {: RESULT = new ASTLiteralNull(nleft); :}
+                    ;
+                	

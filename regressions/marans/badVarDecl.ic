@@ -1,0 +1,7 @@
+//output: Failed.
+
+class Peter extends Piper {
+      void picked (int a, int packOf){
+      	    int pickledPepper == 0;
+      }
+}

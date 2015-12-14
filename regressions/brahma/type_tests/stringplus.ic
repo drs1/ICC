@@ -1,0 +1,10 @@
+//output: Success.
+
+class Concat {
+    void foo() {
+        string s = "hi";
+        string t = "bye" + " ";
+        string r;
+        r = s + t + "yolo";
+    }
+}

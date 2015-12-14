@@ -1,0 +1,9 @@
+//output: Failed.
+
+class A{
+
+      int m(int a, string b){
+      	  return a + b;
+      }
+
+}

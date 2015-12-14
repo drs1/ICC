@@ -1,0 +1,5 @@
+//output: Failed.
+
+class Cat extends Cat {
+    int x;
+}

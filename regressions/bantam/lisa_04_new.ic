@@ -1,0 +1,9 @@
+//Output: Failed.
+
+class Test {
+  boolean test() {
+    string s = new Class();
+    int i = new int[7];
+    
+  }
+}

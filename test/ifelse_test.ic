@@ -1,0 +1,15 @@
+//output: Success.
+class IfElseTest {
+  void main(string[] args) {
+        int i = 1;
+	int j = 1;
+	if (i == j) {
+	   Library.println("yes!");
+	} else {
+	   if (i == j) {
+	   } else {
+	     Library.println("no!");
+	   }
+        }
+      }
+}

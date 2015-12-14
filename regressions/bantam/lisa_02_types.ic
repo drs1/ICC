@@ -1,0 +1,7 @@
+//Output: Failed.
+
+class Test {
+  int i;
+  String s;
+  boolean b;
+}

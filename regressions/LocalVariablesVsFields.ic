@@ -1,0 +1,10 @@
+//output: Success.
+
+class A {
+	int x;
+	void f() {
+		int x;
+		x = 1;
+		this.x = 1;
+	}
+}

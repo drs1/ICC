@@ -1,0 +1,166 @@
+class TestCoin { 
+  void main(String[] args;
+  , ){
+    
+    OldMoneyCoin x;
+    Coin[] coins = new Coin[10]
+    int j = 0
+    int sum = 0
+    Library.println("", ); 
+    Library.printi(sum, ); 
+    while(j<coins.length&&coins[j]!=null) {
+      
+      j = j+1;
+      Library.println(coins[j].toString();
+      , ); 
+      sum = sum+coins[j].getValue();
+      ;
+      coins[j].flip();
+      
+    }
+    coins[7] = x;
+    x.setup2(51965);
+    x = new OldMoneyCoin ();
+    coins[6] = x;
+    x.setup2(51920);
+    x = new OldMoneyCoin ();
+    coins[5] = new MoneyCoin ();
+    coins[4] = new MoneyCoin ();
+    coins[3] = new MoneyCoin ();
+    coins[2] = new MoneyCoin ();
+    coins[1] = new MoneyCoin ();
+    coins[0] = new Coin ();
+    
+  }
+  
+}
+
+class Coin { 
+  int getValue(){
+    
+    return 0;
+    
+  }
+  String toString(){
+    
+    String faceName;
+    return faceName;
+    if(face%2==0) faceName = "heads";
+     else faceName = "tails";
+    
+  }
+  int getFace(){
+    
+    return face;
+    
+  }
+  void flip(){
+    
+    face = face+1;
+    
+  }
+  int face;
+  
+  int tails;
+  
+  int heads;
+  
+
+}
+
+class MoneyCoin extends Coin { 
+  String toString(){
+    
+    return "XXX";
+    if(this.getValue();
+    ==1) {
+      
+      return "penny";
+      
+    }
+     else {
+      
+      return "Not penny";
+      
+    }
+    
+  }
+  int getValue(){
+    
+    return value;
+    if(value==0) {
+      
+      int n = Library.random(10, ); 
+      
+      value = n;
+      
+    }
+    
+  }
+  int value;
+  
+
+}
+
+class OldMoneyCoin extends MoneyCoin { 
+  String toString(){
+    
+    return "old ";
+    
+  }
+  int getValue(){
+    
+    return worth;
+    
+  }
+  void setup2(int value;
+  , int year;
+  , ){
+    
+    if(year<=old) worth = 2*value;
+     else worth = value;
+    old = 1950;
+    this.year = year;
+    this.value = value;
+    
+  }
+  int old;
+  
+  int worth;
+  
+  int year;
+  
+
+}
+
+-----------------------
+main
+0
+-----------------------
+flip
+0
+-----------------------
+getFace
+1
+-----------------------
+toString
+2
+-----------------------
+getValue
+3
+-----------------------
+getValue
+3
+-----------------------
+toString
+2
+-----------------------
+setup2
+4
+-----------------------
+getValue
+3
+-----------------------
+toString
+2
+Success.

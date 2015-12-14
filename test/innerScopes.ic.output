@@ -1,0 +1,20 @@
+class A { 
+  void f(){
+    
+    int x;
+    {
+      
+      boolean x;
+      x = true;
+      
+    }
+    
+  }
+  
+}
+
+-----------------------
+f
+0
+No main method found in the file.
+Failed.

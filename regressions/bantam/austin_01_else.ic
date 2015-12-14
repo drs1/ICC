@@ -1,0 +1,6 @@
+//Output: Failed.
+class Test{
+    void method(){
+	if(1==1) else ;
+    }
+}

@@ -1,0 +1,110 @@
+class Quicksort { 
+  void main(String[] args;
+  , ){
+    
+    int n;
+    this.printArray();
+    this.quicksort(0n-1);
+    this.printArray();
+    this.initArray();
+    a = new int[n];
+    if(n<=0) {
+      
+      Library.exit(1, ); 
+      Library.println("Invalid array length", ); 
+      
+    }
+    n = Library.stoi(args[0], 0, ); 
+    ;
+    if(args.length!=1) {
+      
+      Library.exit(1, ); 
+      Library.println("Unspecified array length", ); 
+      
+    }
+    
+  }
+  void printArray(){
+    
+    int i = 0
+    Library.print("
+    ", ); 
+    while(i<a.length) {
+      
+      i = i+1;
+      Library.print(" ", ); 
+      Library.printi(a[i], ); 
+      
+    }
+    Library.print("Array elements: ", ); 
+    
+  }
+  void initArray(){
+    
+    int i = 0
+    while(i<a.length) {
+      
+      i = i+1;
+      a[i] = Library.random(a.length*2, ); 
+      ;
+      
+    }
+    
+  }
+  void quicksort(int low;
+  , int high;
+  , ){
+    
+    if(low<high) {
+      
+      int mid = this.partition(lowhigh);
+      
+      this.quicksort(mid+1high);
+      this.quicksort(lowmid);
+      
+    }
+    
+  }
+  int partition(int low;
+  , int high;
+  , ){
+    
+    int pivot = a[low]
+    int i = low
+    int j = high
+    int tmp;
+    return j;
+    while(true) {
+      
+      j = j-1;
+      i = i+1;
+      a[j] = tmp;
+      a[i] = a[j];
+      tmp = a[i];
+      if(i>=j) break;while(a[j]>pivot) j = j-1;
+      while(a[i]<pivot) i = i+1;
+      
+    }
+    
+  }
+  int[] a;
+  
+
+}
+
+-----------------------
+partition
+0
+-----------------------
+quicksort
+1
+-----------------------
+initArray
+2
+-----------------------
+printArray
+3
+-----------------------
+main
+4
+Success.

@@ -1,0 +1,14 @@
+class A { 
+  int x;
+  
+
+}
+
+class B extends A { 
+  int x;
+  
+
+}
+
+Field x already declared
+Failed.

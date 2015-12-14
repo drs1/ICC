@@ -1,0 +1,75 @@
+class Return { 
+  void test(){
+    
+    int x;
+    int res;
+    A a;
+    A aa;
+    a = aa.m(0);
+    ;
+    this.m_Return();
+    Library.println("", ); 
+    Library.printi(res, ); 
+    res = this.m_int(2);
+    ;
+    this.m_void();
+    if(aa!=a) Library.println("hmm?", ); 
+    aa = a.m(0);
+    ;
+    a = new A ();
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    new Return ().test();
+    
+  }
+  Return m_Return(){
+    
+    return this;
+    
+  }
+  int m_int(int x;
+  , ){
+    
+    return 1+x-3*4*x;
+    
+  }
+  void m_void(){
+    
+    return;
+    
+  }
+  
+}
+
+class A { 
+  A m(int a;
+  , ){
+    
+    return this;
+    
+  }
+  
+}
+
+-----------------------
+m_void
+0
+-----------------------
+m_int
+1
+-----------------------
+m_Return
+2
+-----------------------
+main
+3
+-----------------------
+test
+4
+-----------------------
+m
+0
+Success.

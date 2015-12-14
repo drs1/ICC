@@ -1,0 +1,15 @@
+class Coolio { 
+  void fityCent(){
+    
+    int x;
+    int z = 54
+    int w = 78
+    String y = "hello, world"
+    int[] n = new int[10]
+    int plusy = 2+3+4+5+7+8+9
+    
+  }
+  
+}
+
+Success.

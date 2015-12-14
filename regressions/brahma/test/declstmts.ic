@@ -1,0 +1,9 @@
+//output: Success.
+
+class Onefish {
+
+    int[] twofish( ) {
+        string redfish;
+        int bluefish = 5 + 7;
+    }
+}

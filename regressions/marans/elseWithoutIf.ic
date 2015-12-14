@@ -1,0 +1,9 @@
+//output: Failed.
+
+class A {
+      void missingIf() {
+      	   else {
+	   	int a = 4;
+	   }
+      }
+}

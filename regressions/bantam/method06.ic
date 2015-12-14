@@ -1,0 +1,7 @@
+//Output: Failed.
+class B {}
+class A extends B {
+    int main(string s, A a, B b){
+	this.main("hello", new B(), new B());
+    }
+}

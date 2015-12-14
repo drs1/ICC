@@ -1,0 +1,3 @@
+We implemented the package symtab which includes a SymbolTable class, a SymbolTableBuilder object, and a NameResolver object.
+We had to make minor changes to ASTNode and Compiler in order to implement this package.
+Our compiler now supports scoping rules and name resolution.

@@ -1,0 +1,6 @@
+//Output: Success.
+class Austin{
+    int f(int[] x){
+	return new int[x.length][x[2]];
+    }	  
+}

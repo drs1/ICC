@@ -1,0 +1,3 @@
+This week we added code to create a cfg and then implemented ReachingCopiesAnalysis and LiveVariableAnalysis.
+Reaching copies operates with a trnasfer function on a map from destinations to sources, and removes and adds
+from this map based on new assignments to destinations.

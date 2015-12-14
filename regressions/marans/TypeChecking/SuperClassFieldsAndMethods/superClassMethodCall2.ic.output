@@ -1,0 +1,32 @@
+class A { 
+  void m(){
+    
+    
+  }
+  
+}
+
+class B extends A { 
+
+}
+
+class C extends B { 
+
+}
+
+class D extends C { 
+
+}
+
+class TestMethod { 
+  void main(String[] args;
+  , ){
+    
+    D d = new D ()
+    d.m();
+    
+  }
+  
+}
+
+Success.

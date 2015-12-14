@@ -1,0 +1,7 @@
+//output: Failed.
+
+class B{
+      boolean b(boolean left, boolean right){
+      	      return left + right;
+      }
+}

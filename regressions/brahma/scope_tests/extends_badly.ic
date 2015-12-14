@@ -1,0 +1,9 @@
+//output: Failed.
+
+class Cat {
+    int x;
+}
+
+class Dog extends Catfish {
+    int z;
+}

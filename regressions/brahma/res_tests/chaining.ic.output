@@ -1,0 +1,20 @@
+class List { 
+  int head,;
+  
+  List tail,;
+  
+  int foo(){
+    
+    return this.tail.tail.tail.tail.tail.tail.tail.tail.tail.tail.tail.head;
+    
+  }
+  int bar(){
+    
+    return tail.tail.tail.tail.tail.tail.tail.tail.foo();
+    ;
+    
+  }
+  
+}
+
+Success.

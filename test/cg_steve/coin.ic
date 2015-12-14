@@ -1,0 +1,145 @@
+/*******************************************
+ TestCoin.java
+ Creat an array of Coins and do some flipping
+********************************************/
+
+class TestCoin {
+    void main (string[] args) {
+	OldMoneyCoin x;
+	Coin[] coins = new Coin[10];  // no more than 10 coins
+	int j = 0;
+	int sum = 0;  // worth of coins
+	coins[0] = new Coin();
+	coins[1] = new MoneyCoin();
+	coins[2] = new MoneyCoin();
+	coins[3] = new MoneyCoin();
+	coins[4] = new MoneyCoin();
+	coins[5] = new MoneyCoin();
+	x = new OldMoneyCoin();
+	x.setup2(5, 1920);
+	coins[6] = x;
+	x = new OldMoneyCoin();
+	x.setup2(5, 1965);
+	coins[7] = x;
+	while (j< coins.length && coins[j]!=null) {
+	    coins[j].flip();				// flip coin
+
+	    sum = sum + coins[j].getValue();	// update worth of collection
+	    Library.println(coins[j].toString());
+	    j = j + 1;
+	}
+	Library.printi(sum);Library.println("");
+    }
+}
+
+
+// Modified version of:
+//********************************************************************
+//  Coin.java       Author: Lewis and Loftus
+//  Represents a coin with two sides that can be flipped.
+//********************************************************************
+
+class Coin
+{
+    int heads;
+    int tails;
+
+    int face;
+
+
+    //-----------------------------------------------------------------
+    //  Flips the coin by randomly choosing a face.
+    //-----------------------------------------------------------------
+    void flip ()
+    {
+	face = face + 1;
+    }
+
+    //-----------------------------------------------------------------
+    //  Returns the current face of the coin as an integer.
+    //-----------------------------------------------------------------
+    int getFace ()
+    {
+	return face;
+    }
+
+    //-----------------------------------------------------------------
+    //  Returns the current face of the coin as a string.
+    //-----------------------------------------------------------------
+    string toString()
+    {
+	string faceName;
+
+	if ((face%2) == 0)
+	    faceName = "heads";
+	else
+	    faceName = "tails";
+
+	return faceName;
+    }
+   
+    // Return value of coin: 0
+    int getValue() { return 0; }
+}
+
+
+/*******************************************
+ MoneyCoin.java
+ Coins with real values: 1, 5, 10, 25 cents
+********************************************/
+
+class MoneyCoin extends Coin {
+
+    int value;                     // monetary value of coin in cents
+
+
+    // Return the value of the coin
+    int getValue() { 
+	if (value == 0) {
+	    int n = Library.random(10);
+	    value = n;
+	} 
+	return value;
+
+    }
+
+    // Return description of coin as a string
+    string toString() {
+	if (getValue() == 1) {
+	    return "penny";
+	} else {
+	    return "Not penny";
+	}
+	return "XXX";
+    }
+}
+
+
+/*******************************************
+ OldMoneyCoin.java
+ Collectible coins worth more than their face value
+********************************************/
+
+class OldMoneyCoin extends MoneyCoin {
+
+    int year;            // year coin is minted
+    int worth;           // market value of coin
+    int old;  // minting year of old coins
+
+    void setup2(int value, int year) {
+	this.value = value;
+	this.year = year;
+	old = 1950;
+	if (year<=old)  worth = 2*value;
+	else            worth = value;
+    }
+   
+    // Return worth of coin
+    int getValue() { return worth; }
+   
+    // Return description of coin as a string
+    string toString() {
+	return "old ";
+    }
+}
+

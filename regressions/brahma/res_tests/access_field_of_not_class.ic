@@ -1,0 +1,9 @@
+//output: Failed.
+
+class Foobar {
+
+    void moobar() {
+        int x;
+        x = x.y;
+    }
+}

@@ -1,0 +1,9 @@
+class EmptyStmt { 
+  void f(){
+    
+    
+  }
+  
+}
+
+Success.

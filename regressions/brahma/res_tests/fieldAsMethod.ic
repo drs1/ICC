@@ -1,0 +1,15 @@
+//output: Failed.
+
+
+class Cat {
+    int z;
+    void foo() { }
+}
+
+class Osstrich {
+
+    void main() {
+        Cat c;
+        c.z();
+    }
+}

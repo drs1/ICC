@@ -1,0 +1,20 @@
+//Output: Success.
+class B{
+      int heyThere(int z, int j, string b){
+      	  return 5;
+      }      
+}
+class C extends B {}
+class A{
+     B  test;
+     int  x;
+     void main(){
+      int y = 0;
+      test = new C();
+      while(y < 10){
+      	      x =  test.heyThere(0, 8, "cat") + test.heyThere(15, 12, "str");
+      	      y = y  + 1;
+      }
+      
+      }
+}

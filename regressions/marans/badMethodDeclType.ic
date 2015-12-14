@@ -1,0 +1,7 @@
+//output: Failed.
+
+class Bad extends Wolf{
+      Integer Tardis() {
+      	      //wrong type for method 
+      }
+}

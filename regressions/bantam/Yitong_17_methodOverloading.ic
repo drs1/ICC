@@ -1,0 +1,11 @@
+//Output: Failed.
+
+class B{
+      int meth(int a, int b, string c){
+
+      }
+
+      int meth(int a, int b) {
+
+      }
+}

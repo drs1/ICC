@@ -1,0 +1,18 @@
+//output: Failed.
+class IfElseTest {
+
+      void main(string[] args) {
+      	   int i = 1;
+	   int j = 1;
+	   if (i == j) {
+	      Library.println("yes!");
+	   } else {
+	      if (i == j && 8=="d") {
+	      } else {
+	      	Library.println("no!");
+		}
+	   }
+      }
+
+
+}

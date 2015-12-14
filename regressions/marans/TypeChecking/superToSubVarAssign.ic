@@ -1,0 +1,11 @@
+//output: Failed.
+
+class A {}
+
+class B extends A{}
+
+class C {
+      void m() {
+      	   B b = new A();
+      }
+}

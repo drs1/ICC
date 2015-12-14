@@ -1,0 +1,7 @@
+//output: Success.
+
+class Foo {
+    int cat;
+    boolean foo;
+    string bat;
+}

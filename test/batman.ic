@@ -1,0 +1,21 @@
+//output: Success.
+
+class A {}
+class B {}
+class C {}
+
+class Batman {
+      void main(string[] args) {
+      	      int i = 1;
+	      while (i <=14) {
+	      	    Library.println("na");
+		    i = i + 1;
+		    if (i == 14) { 
+		       Library.println("BATMANNNNN"); 
+		       break; 
+		    } else {
+		       continue;
+		    }
+	      }
+      }
+}

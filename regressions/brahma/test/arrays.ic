@@ -1,0 +1,5 @@
+//output: Success.
+
+class Cls {
+    int[] foobar;
+}

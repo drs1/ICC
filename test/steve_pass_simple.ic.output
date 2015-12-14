@@ -1,0 +1,33 @@
+class A { 
+  A b;
+  
+  A a(){
+    
+    return this;
+    
+  }
+  void doStuff(){
+    
+    new A ().a();
+    .b = this.b;
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    new A ().doStuff();
+    
+  }
+  
+}
+
+-----------------------
+main
+0
+-----------------------
+doStuff
+1
+-----------------------
+a
+2
+Success.

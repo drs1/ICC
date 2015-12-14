@@ -1,0 +1,12 @@
+class A { 
+  void m(String s;
+  , ){
+    
+    Library.stoa("so many tests", ); 
+    Library.stoa(s, ); 
+    
+  }
+  
+}
+
+Success.

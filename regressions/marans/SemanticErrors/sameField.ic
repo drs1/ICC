@@ -1,0 +1,6 @@
+//output: Failed.
+
+class Merp {
+      int a;
+      int a;
+}

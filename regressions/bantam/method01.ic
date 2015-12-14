@@ -1,0 +1,7 @@
+//Output: Failed.
+class A {
+      void m1() {
+      	   int x = 0;
+	   return 4;
+      }
+}

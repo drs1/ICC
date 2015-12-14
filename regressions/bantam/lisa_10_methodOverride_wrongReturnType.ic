@@ -1,0 +1,9 @@
+//Output: Failed.
+
+class A {
+      int meth(int a, int b) { }
+}
+
+class B extends A {
+      boolean meth(int a, int b) { }
+}

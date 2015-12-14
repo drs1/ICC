@@ -1,0 +1,9 @@
+//Output: Success.
+
+class A {
+      int method(int a, int b, boolean s) { }
+}
+
+class B extends A {
+      int method(int a, int b, boolean s) { }
+}

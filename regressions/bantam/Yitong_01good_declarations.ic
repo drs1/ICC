@@ -1,0 +1,13 @@
+//Output: Success.
+
+class Test{
+      int[] array;
+
+      boolean file(){
+     	      boolean var = true, var1 = false, var2 = false;
+	      array[1] = 3;
+	      
+      }
+
+
+}

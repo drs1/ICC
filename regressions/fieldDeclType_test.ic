@@ -1,0 +1,20 @@
+//output: Success.
+
+class TestClass{
+      void main(string[] args){
+      	   
+      }     
+
+      string println(string s){
+
+
+      }
+
+
+}
+
+class TestClass2{
+      void main(string[] args){
+
+      }
+}

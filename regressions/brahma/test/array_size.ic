@@ -1,0 +1,5 @@
+//output: Failed.
+
+class JJ {
+    int[56] a;
+}

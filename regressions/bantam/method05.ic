@@ -1,0 +1,7 @@
+//Output: Failed.
+class A {
+    int main(string s){
+	Library.println(s);
+	Library.println(s,s);
+    }
+}

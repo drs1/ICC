@@ -1,0 +1,12 @@
+class A { 
+  void m(String s;
+  , ){
+    
+    Library.print("hi", ); 
+    Library.print(s, ); 
+    
+  }
+  
+}
+
+Success.

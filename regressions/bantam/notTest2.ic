@@ -1,0 +1,10 @@
+//Output: Success.
+class A {
+      boolean x; 
+      boolean m() {
+          this.x = !x;
+      }
+      boolean m2() {
+      boolean y = !true;
+}
+}

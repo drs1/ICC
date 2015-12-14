@@ -1,0 +1,21 @@
+class A { 
+  int x,;
+  
+
+}
+
+class B extends A { 
+
+}
+
+class C { 
+  int m(){
+    
+    B b = new B ()
+    return b.x;
+    
+  }
+  
+}
+
+Success.

@@ -1,0 +1,27 @@
+class TestClass2 { 
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  
+}
+
+class TestClass { 
+  void main(String[] args;
+  , ){
+    
+    TestClass2 tc = new TestClass2 ()
+    
+  }
+  String println(String s;
+  , ){
+    
+    int i = 0
+    String t = "test"
+    
+  }
+  
+}
+
+Success.

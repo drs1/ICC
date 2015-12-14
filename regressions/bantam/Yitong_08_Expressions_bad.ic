@@ -1,0 +1,10 @@
+//Output: Failed.
+class Friends{}
+class Tea extends Friends{
+      /*Hello! */
+      boolean s;
+      void method(int stuf, string bobs, boolean stuff){
+      	  int s = Library.ded(this, new Friends(), 5,  true, !3);//, null, true, -2);  
+      }
+      int is;
+}

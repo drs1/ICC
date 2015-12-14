@@ -1,0 +1,54 @@
+class A { 
+  void m(){
+    
+    Library.println("A fields: "+Library.itos(a, ); 
+    , ); 
+    
+  }
+  int a;
+  
+
+}
+
+class B extends A { 
+  void m(){
+    
+    Library.println("", ); 
+    Library.printb(b, ); 
+    Library.print(", ", ); 
+    Library.printi(a, ); 
+    Library.print("B fields: ", ); 
+    
+  }
+  boolean b;
+  
+
+}
+
+class C { 
+  void main(String[] args;
+  , ){
+    
+    A oa = new A ()
+    B ob = new B ()
+    ob.m();
+    oa.m();
+    ob.b = true;
+    ob.a = 413;
+    oa.a = 412;
+    if(args.length!=0) oa = ob;
+    
+  }
+  
+}
+
+-----------------------
+m
+0
+-----------------------
+m
+0
+-----------------------
+main
+0
+Success.

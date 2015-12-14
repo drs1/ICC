@@ -1,0 +1,10 @@
+//output: Failed.
+
+class thingymabob {
+
+    void foo(void x, void f) {
+    }
+
+    void m;
+
+}

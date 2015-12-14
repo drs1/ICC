@@ -1,0 +1,6 @@
+//Output: Failed.
+
+class Test {
+      int x = 2;
+      int x;
+}

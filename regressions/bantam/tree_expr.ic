@@ -1,0 +1,7 @@
+//Output: Failed.
+
+class A {
+    void m(int x) {
+	b = (x + 3 == 7 || a[1] > -x);
+    }
+}

@@ -1,0 +1,15 @@
+//Output: Success.
+class A{
+      int x;
+      int y;
+      string z;
+      string a;
+      void binop(){
+      	   
+	   x = x + y;
+      	   x = x + 4;
+	   a = a + z;
+	   a = a + "Hogwarts";
+      }
+
+}

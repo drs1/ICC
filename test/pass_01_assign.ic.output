@@ -1,0 +1,59 @@
+class A { 
+  int n(A a;
+  , ){
+    
+    int[][] g;
+    return a.ff;
+    
+  }
+  A m(){
+    
+    return new A ();
+    
+  }
+  void test(){
+    
+    int a;
+    String s;
+    int[] b;
+    String[] t;
+    A c;
+    A[] d;
+    d[b[0]+a] = f;
+    d[c.ff] = c.f;
+    c.ff = a;
+    a = new int[][2][2][1];
+    b = new int[2];
+    a = c.m();
+    .n(c.m();
+    );
+    ;
+    b[1] = a;
+    a = b[0];
+    
+  }
+  void main(String[] args;
+  , ){
+    
+    
+  }
+  int ff;
+  
+  A f;
+  
+
+}
+
+-----------------------
+main
+0
+-----------------------
+test
+1
+-----------------------
+m
+2
+-----------------------
+n
+3
+Success.

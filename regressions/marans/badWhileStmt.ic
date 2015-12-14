@@ -1,0 +1,9 @@
+//output: Failed.
+
+class A {
+      int badExpr(int a, int b){
+      	  a + while(b){	 
+	    		return 5;
+	  	  }
+	  }
+}

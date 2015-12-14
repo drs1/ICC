@@ -1,0 +1,9 @@
+//Output: Success.
+
+class A {
+    boolean b;
+    void m(int x) {
+    	 int[] a;
+	b = (x + 3 == 7 || a[1] > -x);
+    }
+}
