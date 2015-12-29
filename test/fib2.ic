@@ -1,0 +1,26 @@
+class Fibonacci {
+     void main(string[] args) {
+         string s = args[0];
+	 int n,r;
+
+	 n = Library.stoi(s,-1);
+	 r = fib(n);
+        
+	 Library.println("Fib2:");
+	 Library.printi(r);
+	 Library.println("");
+     }
+
+     int fib(int n) {
+     	Library.println("Fibbing: ");
+     	Library.printi(n);
+	Library.println("");
+	if (n == 1) {
+	   return 1;
+	}
+	
+	Library.printi(fib(n-1));
+	Library.println("");
+        return (n * fib(n-1));
+     } 
+}

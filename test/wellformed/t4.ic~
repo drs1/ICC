@@ -1,0 +1,11 @@
+class A{
+    void main(string[] args){
+    	 bool n;
+
+	 n = false;
+
+	 printb(!n);
+
+	 }
+    }
+}

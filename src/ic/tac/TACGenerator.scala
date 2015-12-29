@@ -15,138 +15,135 @@ object TACGenerator {
 
 	//Generates TAC instructions for all methods in a class
 	def gen(c: ASTClassDecl): Unit = {
-			for(decl <- c.decls){
-				decl match {
-				case f @ ASTFieldDecl(_type: ASTType, id: String /*, id_list: List[String]*/, line: Int) => {}
+	  for(decl <- c.decls){
+			decl match {
+  			case f @ ASTFieldDecl(_type: ASTType, id: String /*, id_list: List[String]*/, line: Int) => {}
 
-				case m @ ASTMethodDecl(_type: ASTType, id: String, formals: List[ASTVarDecl], block: ASTBlock, line: Int) => {
-					// pass the empty tacList down through gen of the block
-					// so the block gets an empty list and adds all instructions of the block to this list
-					m.tacList = new TACList(block.local_size);
-				        m.tacList.add(TAC_Preamble(formals, line));  // for cg_x86 -- need to mark preamble.
-					gen(block, m.tacList, null, null);
-					m.tacList.add(new TAC_RET(None, line, "")); // for cg_x86 -- need return on all paths through TAC
-				}
-				}
-			}
-	}
+	  		case m @ ASTMethodDecl(_type: ASTType, id: String, formals: List[ASTVarDecl], block: ASTBlock, line: Int) => {
+		 			// pass the empty tacList down through gen of the block
+		  		// so the block gets an empty list and adds all instructions of the block to this list
+			  	m.tacList = new TACList(block.local_size);
+			    m.tacList.add(TAC_Preamble(formals, line));  // for cg_x86 -- need to mark preamble.
+				  gen(block, m.tacList, null, null);
+				  m.tacList.add(new TAC_RET(None, line, "")); // for cg_x86 -- need return on all paths through TAC
+	      }
+		  }
+		}
+  }
+
 	
 	//we're in a block, recursively add all the instructions to this list
 	def gen(b: ASTBlock, tacList: TACList, topLoop: TAC_Label, botLoop: TAC_Label): Unit = {
-			for(v <- b.decls){
-			  gen(v, tacList, topLoop, botLoop)
-			}
+		for(v <- b.decls){
+		  gen(v, tacList, topLoop, botLoop)
+		}
 
-				for(stmt <- b.stmts)
-					gen(stmt, tacList, topLoop, botLoop);
-						b.local_size = tacList.size();
+		for(stmt <- b.stmts){
+			gen(stmt, tacList, topLoop, botLoop);
+			b.local_size = tacList.size();
+		}
 	}
 
 	//
 	def gen(v: ASTVarDecl, tacList: TACList, topLoop: TAC_Label, botLoop: TAC_Label): Unit = {
-			v.optExpr match {
-			case Some(x) => {
-				val varOp = new TAC_Var(v, v.line, "");
-				val temp = gen(x, tacList);
-				tacList.add(new TAC_Copy(varOp, temp, v.line, ""));
-			}
-			case None => {}
-			}
-	}
+		v.optExpr match {
+		case Some(x) => {
+			val varOp = new TAC_Var(v, v.line, "");
+			val temp = gen(x, tacList);
+			tacList.add(new TAC_Copy(varOp, temp, v.line, ""));
+		}
+		case None => {}
+		}
+  }
 
 	def gen(loc: ASTLoc, expr: TACOp, tacList: TACList, line: Int): Unit = {
-			loc match{
-			case va @ ASTVarAccess(id: String, line: Int) =>
-			gen(va.resolved, expr, tacList, line);
+		loc match{
+			case va @ ASTVarAccess(id: String, line: Int) =>	gen(va.resolved, expr, tacList, line);
 			case l @ ASTLocalAccess(id: String, line: Int) => {
 				val v = new TAC_Var(l.decl, line, "");
 				tacList.add(new TAC_Copy(v, expr, line, ""));
 			}
 			case fa @ ASTFieldAccess(receiver: ASTExpr, id: String, line: Int) => {
 				val rec: TACOp = gen(receiver, tacList);
-			tacList.add(new TAC_NullCheck(rec, line, ""));
-			tacList.add(new TAC_FieldStore(rec, fa.decl, expr, line, ""));
+			  tacList.add(new TAC_NullCheck(rec, line, ""));
+			  tacList.add(new TAC_FieldStore(rec, fa.decl, expr, line, ""));
 			}
 			case aa @ ASTArrayAccess(array: ASTExpr, index: ASTExpr, line: Int) => {
 				val arr: TACOp = gen(array, tacList);
-			val ind: TACOp = gen(index, tacList);
-			tacList.add(new TAC_NullCheck(arr, line, ""));
-			tacList.add(new TAC_IndexInBounds(arr, ind, line, ""));
-			tacList.add(new TAC_ArrayStore(arr, ind, expr, line, ""));
+			  val ind: TACOp = gen(index, tacList);
+			  tacList.add(new TAC_NullCheck(arr, line, ""));
+			  tacList.add(new TAC_IndexInBounds(arr, ind, line, ""));
+			  tacList.add(new TAC_ArrayStore(arr, ind, expr, line, ""));
 			}
-			}
+		}
 	}
 
 	//Generate TAC Instructions for a Statement Node in the AST and adds them to the TACList for the current method
 	def gen(stmt: ASTStmt, tacList: TACList, topLoop: TAC_Label, botLoop: TAC_Label): Unit = {
 			stmt match{
-			case l @ ASTStmtLoc(loc: ASTLoc, expr: ASTExpr, line: Int) => {
-				val exprGen: TACOp = gen(expr, tacList);
-			gen(loc, exprGen, tacList, line)
-			}
+			  case l @ ASTStmtLoc(loc: ASTLoc, expr: ASTExpr, line: Int) => {
+				  val exprGen: TACOp = gen(expr, tacList);
+			    gen(loc, exprGen, tacList, line)
+			  }
 
-			case c @ ASTStmtCall(call: ASTCall, line: Int) => {
-				call match {
-				case lc @ ASTLibCall(id: String, opList: List[ASTExpr], line: Int) => {
-					val paramList: List[TACOp] = makeParams(opList, tacList);
+			  case c @ ASTStmtCall(call: ASTCall, line: Int) => {
+  				call match {
+	    			case lc @ ASTLibCall(id: String, opList: List[ASTExpr], line: Int) => {
+			  		  val paramList: List[TACOp] = makeParams(opList, tacList);
 
-				if(id.startsWith("print") || id.equals("exit"))
-					tacList.add(new TACCall_LibCall(None, id, paramList, line, ""));
-				else {
-					val temp: TACOp = tacList.alloc(line);
-				tacList.add(new TACCall_LibCall(Some(temp), id, paramList, line, "")); 
-				}
-				}
-				case vc @ ASTVirtualCall(opExpr: ASTExpr, id: String, params: List[ASTExpr], line:Int) => {
-					val paramList: List[TACOp] = makeParams(params, tacList);
+				      if(id.startsWith("print") || id.equals("exit")){
+  					    tacList.add(new TACCall_LibCall(None, id, paramList, line, ""));
+	  			    }else {
+		  			    val temp: TACOp = tacList.alloc(line);
+			  	      tacList.add(new TACCall_LibCall(Some(temp), id, paramList, line, "")); 
+				      }
+				    }
+				    case vc @ ASTVirtualCall(opExpr: ASTExpr, id: String, params: List[ASTExpr], line:Int) => {
+					    val paramList: List[TACOp] = makeParams(params, tacList);
 
-				val rec = gen(opExpr, tacList);
-				tacList.add(new TAC_NullCheck(rec, line, ""));
-				vc.decl._type match {
-				case ASTTypeVoid(line: Int) => {
-					tacList.add(new TACCall_VirCall(None, rec, vc.decl, paramList, line, "Virtual Call with no return"));
-				}
-				case _ => {
-					val temp: TACOp = tacList.alloc(line)
-							tacList.add(new TACCall_VirCall(Some(temp),rec,  vc.decl, paramList, line, "Virtual Call with return"));
-				}
-				}
-				}
-				}
-			}
+    				  val rec = gen(opExpr, tacList);
+		    		  tacList.add(new TAC_NullCheck(rec, line, ""));
+				      vc.decl._type match {
+				        case ASTTypeVoid(line: Int) => {
+					        tacList.add(new TACCall_VirCall(None, rec, vc.decl, paramList, line, "Virtual Call with no return"));
+		  	        }
+				        case _ => {
+					        val temp: TACOp = tacList.alloc(line)
+							    tacList.add(new TACCall_VirCall(Some(temp),rec,  vc.decl, paramList, line, "Virtual Call with return"));
+				        }  
+				      }
+				    }
+  				}
+			  }
 
-			case r @ ASTStmtRet(optExpr: Option[ASTExpr], line: Int) => {
-				optExpr match{
-				case Some(x: ASTExpr) =>
-				tacList.add(new TAC_RET(Some(gen(x, tacList)), line, ""));
-				case None =>
-				tacList.add(new TAC_RET(None, line, ""));
-				}
-			}
+  			case r @ ASTStmtRet(optExpr: Option[ASTExpr], line: Int) => {
+	  			optExpr match{
+		    		case Some(x: ASTExpr) => tacList.add(new TAC_RET(Some(gen(x, tacList)), line, ""));
+				    case None =>  tacList.add(new TAC_RET(None, line, ""));
+				  }
+			  }
 
 			case i @ ASTStmtIf(test: ASTExpr, cond: ASTStmt, opElse: Option[ASTStmt], line: Int) => {
 				//conditional jump
 				val testGen: TACOp = gen(test, tacList);
-			val label: TAC_Label = new TAC_Label("L"+labelCount, line, "End of IF statement, start of ELSE for " + testGen + " from line " + line);
-			//revert the test, then jump to the label if the test was false
-			val temp = tacList.alloc(line);
-			tacList.add(new TAC_UnOp(temp, testGen, new UnNot(), line, ""));
-			tacList.add(new TAC_CJump(label, temp, line, ""));
-			labelCount = labelCount+1
-					gen(cond, tacList, topLoop, botLoop) //code for IF
-					opElse match{
-					case Some(x: ASTStmt) => {
-						val endLabel: TAC_Label = new TAC_Label("L"+labelCount, line, "End of ELSE statement from line " + line);
-					tacList.add(new TAC_Jump(endLabel, line, ""));
-					tacList.add(label);
-					labelCount = labelCount+1;
-					gen(x, tacList, topLoop, botLoop); //code for ELSE
-					tacList.add(endLabel);
-					}
-					case None => {
-						tacList.add(label);
-					}
-			}
+  			val label: TAC_Label = new TAC_Label("L"+labelCount, line, "End of IF statement, start of ELSE for " + testGen + " from line " + line);
+	  		//revert the test, then jump to the label if the test was false
+		  	val temp = tacList.alloc(line);
+			  tacList.add(new TAC_UnOp(temp, testGen, new UnNot(), line, ""));
+			  tacList.add(new TAC_CJump(label, temp, line, ""));
+			  labelCount = labelCount+1
+				gen(cond, tacList, topLoop, botLoop) //code for IF
+				opElse match{
+			  	case Some(x: ASTStmt) => {
+				  	val endLabel: TAC_Label = new TAC_Label("L"+labelCount, line, "End of ELSE statement from line " + line);
+  					tacList.add(new TAC_Jump(endLabel, line, ""));
+	  				tacList.add(label);
+		  			labelCount = labelCount+1;
+			  		gen(x, tacList, topLoop, botLoop); //code for ELSE
+				  	tacList.add(endLabel);
+				  }
+				  case None => tacList.add(label);
+			  }
 			}
 
 			case w @ ASTStmtWhile(test: ASTExpr, stmt: ASTStmt, line: Int) => {
@@ -337,7 +334,10 @@ object TACGenerator {
 				return new TAC_Lit(li, line, "")
 			}
 			case ls @ ASTLiteralString(s: String, line: Int) => {
-				return new TAC_Lit(ls, line, "");
+			  val temp = tacList.alloc(line);
+			  val stubCopy = new TAC_Copy(temp, new TAC_Lit(ls, line, ""),line, "")
+			  tacList.add(stubCopy);
+				return temp
 			}
 			case lb @ ASTLiteralBool(b: Boolean, line: Int) => {
 				return new TAC_Lit(lb, line, "");

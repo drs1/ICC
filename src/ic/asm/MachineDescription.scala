@@ -9,6 +9,9 @@ package ic.asm
  * architecture.  See X86MachineDescription for an example.
  */
 abstract class MachineDescription {
+  
+  
+    def commentChar(): String;
 
     /************* Physical Registers ***********/
     
@@ -22,13 +25,18 @@ abstract class MachineDescription {
      * All registers that may be used by a register allocator.  This must
      * not include PC or FP.
      */
-    def assignableRegisters(): List[PhysicalRegister] = callerSaveRegisters() ++ calleeSaveRegisters();
+    def assignableRegisters(): List[PhysicalRegister] = {
+      var result = callerSaveRegisters() ++ calleeSaveRegisters()
+      result.filter(x => !preColoredRegisters().contains(x))
+    }
 
     /**
      * All caller/callee save registers.  
      */
     def callerSaveRegisters(): List[PhysicalRegister];
     def calleeSaveRegisters(): List[PhysicalRegister];
+    def preColoredRegisters(): List[PhysicalRegister];
+
 
     /************* Stack Slots for Locals ***********/
     

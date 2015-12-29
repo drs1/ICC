@@ -29,6 +29,10 @@ object PhysicalRegister {
 
 }
 
+object ASMInstr {
+  var commentSequence = "#";
+}
+
 /**
  * Superclass of all Assembly Instructions.
  */
@@ -38,7 +42,7 @@ abstract class ASMInstr(val comment : String);
  * Comments in the concrete ASM.
  */
 case class ASMComment(val lineComment: String) extends ASMInstr("") {
-    override def toString() = String.format("# %s", lineComment.replace("\n", "\\n"));
+    override def toString() = String.format(ASMInstr.commentSequence + " %s", lineComment.replace("\n", "\\n"));
 }
 
 /**

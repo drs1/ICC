@@ -1,0 +1,9 @@
+class A{
+    void main(string[] args){
+    	 int n;
+	 boolean b;
+	 n = 2;
+	 b = n>0;
+	 Library.printb(b);
+    }
+}

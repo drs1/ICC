@@ -27,18 +27,20 @@ class Quicksort {
     void quicksort(int low, int high) {
     if (low < high) {
         int mid = partition(low, high);
-	    quicksort(low, mid);
-	        quicksort(mid+1, high);
-		}
+	quicksort(low, mid);
+	quicksort(mid+1, high);
+	}
     }
 
     void initArray() {
-    int i = 0;
-    while(i < a.length) {
-        a[i] =  Library.random(a.length*2);
-	    i = i+1;
-	    }
+        int i = 0;
+    	while(i < a.length) {
+        	a[i] =  Library.random(a.length*2);
+		i = i+1;
+	}
+	Library.printi(n);
     }
+
 
     void printArray() {
     int i = 0;
@@ -53,23 +55,16 @@ class Quicksort {
     }
 
     void main(string[] args) {
-    int n;
+        int n;
 
-    if (args.length != 1) {
-        Library.println("Unspecified array length");
-	    Library.exit(1);
-	    }
+	n = 10;
 
-	    n = Library.stoi(args[0],0);
-	    if (n<=0) {
-	        Library.println("Invalid array length");
-		    Library.exit(1);
-		    }
-		    a = new int[n];
+	Library.printi(n);
 
-		    initArray();
-		    printArray();
-		    quicksort(0, n-1);
-		    printArray();
+        a = new int[n];
+        initArray();
+        printArray();
+        quicksort(0, n-1);
+       printArray();
     }
 }

@@ -1,19 +1,16 @@
 class Fibonacci {
+     void main(string[] args) {
+	 int n,r;
 
-    void main(string[] args) {
-        string s = args[0];
-        int n,r;
-
-        n = Library.stoi(s,-1);
-        r = fib(n);
+	 n = 10;
+	 r = fib(n);
         
-        Library.printi(r);
-        Library.println("");
-    }
+	 Library.printi(r);
+	 Library.println("");
+     }
 
-    int fib(int n) {
+     int fib(int n) {
         if (n < 2) return n;
         return fib(n-1) + fib(n-2);
-    } 
+     } 
 }
-

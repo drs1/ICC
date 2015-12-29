@@ -1,0 +1,12 @@
+class A{
+	int a			;
+}
+
+class B{
+	void main(string[] args){
+		A oa = new A()	;
+		oa.a = 2;
+		Library.printi(oa.a);
+	
+	}
+}

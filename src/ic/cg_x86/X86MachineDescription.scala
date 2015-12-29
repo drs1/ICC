@@ -36,12 +36,18 @@ object X86MachineDescription extends MachineDescription {
 
     def calleeSaveRegisters(): List[PhysicalRegister] =
         List[PhysicalRegister](R12, R13, R14, R15, RBX);
+    
+    //precolored: rax rdx rsi rdi
+    def preColoredRegisters(): List[PhysicalRegister] =
+        List[PhysicalRegister]();
+      
 
         
     def firstAvailableOffsetForLocals(): Int = -8;
     def firstAvailableOffsetForParameters(): Int = 16;
     def sizeOfDataElement(): Int = 8;
     
+    def commentChar() = "#"
     
     /*
      * Standard movq instructions with frame-relative offets.  Both abstract and actual ASM

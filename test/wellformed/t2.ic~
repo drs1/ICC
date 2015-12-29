@@ -1,0 +1,7 @@
+class A{
+    void main(string[] args){
+        string s;
+	s = "Hello World\n"
+	Library.println(s);
+    }
+}

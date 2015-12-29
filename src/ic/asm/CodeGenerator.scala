@@ -40,7 +40,7 @@ object CodeGenerator {
   def labelForStringConstant(stringConstant: String): String = {
     stringConstantsToLabel.get(stringConstant) match {
       case None => {
-        val label = "_str" + stringConstantsToLabel.size;
+        val label = "str" + stringConstantsToLabel.size;
         stringConstantsToLabel.put(stringConstant, label);
         label;
       }

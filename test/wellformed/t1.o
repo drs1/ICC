@@ -1,0 +1,445 @@
+WarmObjectFile2
+File t1.s
+Symbol AMain 2
+Symbol AVT 1
+Symbol LIBAllocateArray 184
+Symbol LIBAllocateObject 179
+Symbol LIBExit 234
+Symbol LIBPrint 200
+Symbol LIBPrintb 211
+Symbol LIBPrinti 208
+Symbol LIBPrintln 190
+Symbol SysEntropy 5
+Symbol SysGetChar 1
+Symbol SysGetNum 2
+Symbol SysHalt 0
+Symbol SysOverlay 6
+Symbol SysPLA 7
+Symbol SysPutChar 3
+Symbol SysPutNum 4
+Symbol false 214
+Symbol heap 235
+Symbol labelArrayBoundsError 154
+Symbol labelArraySizeError 158
+Symbol labelDivByZeroError 162
+Symbol labelNullPtrError 150
+Symbol main 166
+Symbol printDone 207
+Symbol printLoop 202
+Symbol printlnDone 197
+Symbol printlnLoop 192
+Symbol strArrayBoundsError 81
+Symbol strArraySizeError 105
+Symbol strNullPtrError 57
+Symbol strdivByZeroError 127
+Symbol true 225
+Register a1 0
+Register a2 1
+Register a3 2
+Register a4 3
+Register bump 3
+Register ccr 16
+Register fp 11
+Register lr 14
+Register pc 15
+Register r0 0
+Register r1 1
+Register r10 10
+Register r11 11
+Register r12 12
+Register r13 13
+Register r14 14
+Register r15 15
+Register r2 2
+Register r3 3
+Register r4 4
+Register r5 5
+Register r6 6
+Register r7 7
+Register r8 8
+Register r9 9
+Register sp 13
+Register v1 4
+Register v2 5
+Register v3 6
+Register v4 7
+Register v5 8
+Register v6 9
+Register v7 10
+Memory 1 2
+Memory 39 4e
+Memory 3a 75
+Memory 3b 6c
+Memory 3c 6c
+Memory 3d 20
+Memory 3e 70
+Memory 3f 6f
+Memory 40 69
+Memory 41 6e
+Memory 42 74
+Memory 43 65
+Memory 44 72
+Memory 45 20
+Memory 46 76
+Memory 47 69
+Memory 48 6f
+Memory 49 6c
+Memory 4a 61
+Memory 4b 74
+Memory 4c 69
+Memory 4d 6f
+Memory 4e 6e
+Memory 4f 2e
+Memory 50 0
+Memory 51 41
+Memory 52 72
+Memory 53 72
+Memory 54 61
+Memory 55 79
+Memory 56 20
+Memory 57 62
+Memory 58 6f
+Memory 59 75
+Memory 5a 6e
+Memory 5b 64
+Memory 5c 73
+Memory 5d 20
+Memory 5e 76
+Memory 5f 69
+Memory 60 6f
+Memory 61 6c
+Memory 62 61
+Memory 63 74
+Memory 64 69
+Memory 65 6f
+Memory 66 6e
+Memory 67 2e
+Memory 68 0
+Memory 69 41
+Memory 6a 72
+Memory 6b 72
+Memory 6c 61
+Memory 6d 79
+Memory 6e 20
+Memory 6f 73
+Memory 70 69
+Memory 71 7a
+Memory 72 65
+Memory 73 20
+Memory 74 76
+Memory 75 69
+Memory 76 6f
+Memory 77 6c
+Memory 78 61
+Memory 79 74
+Memory 7a 69
+Memory 7b 6f
+Memory 7c 6e
+Memory 7d 2e
+Memory 7e 0
+Memory 7f 44
+Memory 80 69
+Memory 81 76
+Memory 82 69
+Memory 83 64
+Memory 84 65
+Memory 85 20
+Memory 86 62
+Memory 87 79
+Memory 88 20
+Memory 89 30
+Memory 8a 20
+Memory 8b 76
+Memory 8c 69
+Memory 8d 6f
+Memory 8e 6c
+Memory 8f 61
+Memory 90 74
+Memory 91 69
+Memory 92 6f
+Memory 93 6e
+Memory 94 2e
+Memory 95 0
+Memory 0 c0000a6
+Memory 2 9f6bfff
+Memory 3 9debfff
+Memory 4 5d84340
+Memory 5 16e820b
+Memory 6 8a5bffd
+Memory 7 8adbffc
+Memory 8 8b5bffb
+Memory 9 8bdbffa
+Memory a 8c5bff9
+Memory b 8cdbff8
+Memory c 8d5bff7
+Memory d 825bffd
+Memory e 5d04100
+Memory f 8d5bff6
+Memory 10 82dbffc
+Memory 11 5d04140
+Memory 12 8d5bff5
+Memory 13 835bffb
+Memory 14 5d04180
+Memory 15 8d5bff4
+Memory 16 83dbffa
+Memory 17 5d041c0
+Memory 18 8d5bff3
+Memory 19 845bff9
+Memory 1a 5d04200
+Memory 1b 8d5bff2
+Memory 1c 84dbff8
+Memory 1d 5d04240
+Memory 1e 8d5bff1
+Memory 1f 855bff7
+Memory 20 5c84280
+Memory 21 8cdbff0
+Memory 22 84d8002
+Memory 23 8cd8002
+Memory 24 84dbffd
+Memory 25 8cd8003
+Memory 26 5c80001
+Memory 27 8cdbfef
+Memory 28 84dbfef
+Memory 29 548201
+Memory 2a 8d5bfee
+Memory 2b 855bfee
+Memory 2c 5c84280
+Memory 2d 8cdbfed
+Memory 2e 84dbfed
+Memory 2f 5804240
+Memory 30 885bfec
+Memory 31 805bfec
+Memory 32 d00009e
+Memory 33 885bfec
+Memory 34 88dbfeb
+Memory 35 895bfea
+Memory 36 5e842c0
+Memory 37 95e8001
+Memory 38 97e8001
+Memory 96 a07bfa3
+Memory 97 d000027
+Memory 98 5800001
+Memory 99 6800000
+Memory 9a a07bfb7
+Memory 9b d000023
+Memory 9c 5800001
+Memory 9d 6800000
+Memory 9e a07bfcb
+Memory 9f d00001f
+Memory a0 5800001
+Memory a1 6800000
+Memory a2 a07bfdd
+Memory a3 d00001b
+Memory a4 5800001
+Memory a5 6800000
+Memory a6 a1f8045
+Memory a7 9f68001
+Memory a8 9de8001
+Memory a9 5d84340
+Memory aa 5800001
+Memory ab d000008
+Memory ac a0fbf55
+Memory ad 8880000
+Memory ae dffff54
+Memory af 5800000
+Memory b0 5e842c0
+Memory b1 95e8001
+Memory b2 6800000
+Memory b3 9f6bfff
+Memory b4 58840c0
+Memory b5 1840c0
+Memory b6 5804040
+Memory b7 97e8001
+Memory b8 9f6bfff
+Memory b9 8818000
+Memory ba 58840c0
+Memory bb 1840c0
+Memory bc 5804040
+Memory bd 97e8001
+Memory be 9f6bfff
+Memory bf 5884000
+Memory c0 18008000
+Memory c1 4c000004
+Memory c2 6800003
+Memory c3 88001
+Memory c4 cfffffc
+Memory c5 5800205
+Memory c6 6800003
+Memory c7 97e8001
+Memory c8 9f6bfff
+Memory c9 5884000
+Memory ca 18008000
+Memory cb 4c000004
+Memory cc 6800003
+Memory cd 88001
+Memory ce cfffffc
+Memory cf 97e8001
+Memory d0 9f6bfff
+Memory d1 6800401
+Memory d2 97e8001
+Memory d3 9f6bfff
+Memory d4 11800001
+Memory d5 4c00000c
+Memory d6 5800223
+Memory d7 6800003
+Memory d8 5800061
+Memory d9 6800003
+Memory da 580041b
+Memory db 6800003
+Memory dc 5800073
+Memory dd 6800003
+Memory de 5800065
+Memory df 6800003
+Memory e0 976bfff
+Memory e1 5800415
+Memory e2 6800003
+Memory e3 5800239
+Memory e4 6800003
+Memory e5 5800075
+Memory e6 6800003
+Memory e7 5800065
+Memory e8 6800003
+Memory e9 976bfff
+Memory ea 6800000
+Source 0          b      main
+Source 2         stu    lr, [sp, #-1]
+Source 3         stu    fp, [sp, #-1]
+Source 4         mov    fp, sp
+Source 5         sub    sp, sp, #22
+Source 6        str r4, [fp, #-3 ]                         ;;;r4 -> r4
+Source 7        str r5, [fp, #-4 ]                         ;;;r5 -> r5
+Source 8        str r6, [fp, #-5 ]                         ;;;r6 -> r6
+Source 9        str r7, [fp, #-6 ]                         ;;;r7 -> r7
+Source a        str r8, [fp, #-7 ]                         ;;;r8 -> r8
+Source b        str r9, [fp, #-8 ]                         ;;;r9 -> r9
+Source c        str r10, [fp, #-9 ]                        ;;;r10 -> r10
+Source d        ldr r4, [fp, #-3 ]                         ;;;r4 -> r4
+Source e        mov    r10, r4                             ;;;mov    _vr1, r4
+Source f        str r10, [fp, #-10 ]                       ;;;r10 -> _vr1
+Source 10        ldr r5, [fp, #-4 ]                         ;;;r5 -> r5
+Source 11        mov    r10, r5                             ;;;mov    _vr2, r5
+Source 12        str r10, [fp, #-11 ]                       ;;;r10 -> _vr2
+Source 13        ldr r6, [fp, #-5 ]                         ;;;r6 -> r6
+Source 14        mov    r10, r6                             ;;;mov    _vr3, r6
+Source 15        str r10, [fp, #-12 ]                       ;;;r10 -> _vr3
+Source 16        ldr r7, [fp, #-6 ]                         ;;;r7 -> r7
+Source 17        mov    r10, r7                             ;;;mov    _vr4, r7
+Source 18        str r10, [fp, #-13 ]                       ;;;r10 -> _vr4
+Source 19        ldr r8, [fp, #-7 ]                         ;;;r8 -> r8
+Source 1a        mov    r10, r8                             ;;;mov    _vr5, r8
+Source 1b        str r10, [fp, #-14 ]                       ;;;r10 -> _vr5
+Source 1c        ldr r9, [fp, #-8 ]                         ;;;r9 -> r9
+Source 1d        mov    r10, r9                             ;;;mov    _vr6, r9
+Source 1e        str r10, [fp, #-15 ]                       ;;;r10 -> _vr6
+Source 1f        ldr r10, [fp, #-9 ]                        ;;;r10 -> r10
+Source 20        mov    r9, r10                             ;;;mov    _vr7, r10
+Source 21        str r9, [fp, #-16 ]                        ;;;r9 -> _vr7
+Source 22        ldr    r9, [fp, #2]                        ;;;ldr    this, [fp, #2]
+Source 23        str r9, [fp, #2 ]                          ;;;r9 -> this
+Source 24        ldr    r9, [fp, #-3]                       ;;;ldr    args, [fp, #-3]
+Source 25        str r9, [fp, #3 ]                          ;;;r9 -> args
+Source 26        mov      r9,#1                             ;;;mov      _vr8,#1
+Source 27        str r9, [fp, #-17 ]                        ;;;r9 -> _vr8
+Source 28        ldr r9, [fp, #-17 ]                        ;;;_vr8 -> r9
+Source 29        add    r10, r9, #2                         ;;;add    _tt0, _vr8, #2
+Source 2a        str r10, [fp, #-18 ]                       ;;;r10 -> _tt0
+Source 2b        ldr r10, [fp, #-18 ]                       ;;;_tt0 -> r10
+Source 2c        mov    r9, r10                             ;;;mov    i, _tt0
+Source 2d        str r9, [fp, #-19 ]                        ;;;r9 -> i
+Source 2e        ldr r9, [fp, #-19 ]                        ;;;i -> r9
+Source 2f        mov    r0, r9                              ;;;mov    r0, i
+Source 30        str r0, [fp, #-20 ]                        ;;;r0 -> r0
+Source 31        ldr r0, [fp, #-20 ]                        ;;;r0 -> r0
+Source 32        bl LIBPrinti                               ;;;bl LIBPrinti
+Source 33        str r0, [fp, #-20 ]                        ;;;r0 -> r0
+Source 34        str r1, [fp, #-21 ]                        ;;;r1 -> r1
+Source 35        str r2, [fp, #-22 ]                        ;;;r2 -> r2
+Source 36        mov    sp, fp                              ;;;mov    sp, fp
+Source 37        ldu    fp, [sp, #1]                        ;;;ldu    fp, [sp, #1]
+Source 38        ldu    pc, [sp, #1]                        ;;;ldu    pc, [sp, #1]
+Source 96          adr    r0, strNullPtrError
+Source 97          bl     LIBPrintln
+Source 98          mov    r0, #1
+Source 99          swi    #SysHalt
+Source 9a          adr    r0, strArrayBoundsError
+Source 9b          bl     LIBPrintln
+Source 9c          mov    r0, #1
+Source 9d          swi    #SysHalt
+Source 9e          adr    r0, strArraySizeError
+Source 9f          bl     LIBPrintln
+Source a0          mov    r0, #1
+Source a1          swi    #SysHalt
+Source a2          adr    r0, strdivByZeroError
+Source a3          bl     LIBPrintln
+Source a4          mov    r0, #1
+Source a5          swi    #SysHalt
+Source a6          adr    bump, heap                                      
+Source a7          stu    lr, [sp, #1]                                    
+Source a8          stu    fp, [sp, #1]                                    
+Source a9          mov    fp, sp                            
+Source aa          mov    r0,  #1   
+Source ab          bl     LIBAllocateObject                       
+Source ac          adr    r1, AVT      
+Source ad          str    r1, [r0]               
+Source ae          bl     AMain      
+Source af          mov    r0, #0                 
+Source b0          mov    sp, fp                 
+Source b1          ldu    fp, [sp, #1]           
+Source b2          swi    #SysHalt
+Source b3         stu     lr, [sp, #-1]
+Source b4         mov     r1, bump
+Source b5         add     bump, r0, bump
+Source b6         mov     r0, r1
+Source b7         ldu     pc, [sp, #1]
+Source b8         stu        lr, [sp, #-1]
+Source b9         str     r0, [bump]
+Source ba         mov        r1, bump
+Source bb         add        bump, r0, bump
+Source bc         mov        r0, r1
+Source bd         ldu        pc, [sp, #1]
+Source be          stu    lr, [sp, #-1]
+Source bf          mov    r1, r0
+Source c0          ldrs   r0, [r1]
+Source c1          beq    printlnDone
+Source c2          swi    #SysPutChar
+Source c3          add    r1, r1, #1
+Source c4          b      printlnLoop
+Source c5          mov       r0, #10
+Source c6          swi       #SysPutChar
+Source c7          ldu       pc, [sp, #1]
+Source c8         stu     lr, [sp, #-1]
+Source c9         mov     r1, r0
+Source ca         ldrs    r0, [r1]
+Source cb         beq        printDone
+Source cc         swi        #SysPutChar
+Source cd         add        r1, r1, #1
+Source ce         b            printLoop
+Source cf         ldu        pc, [sp, #1]
+Source d0         stu        lr, [sp, #-1]
+Source d1         swi        #SysPutNum
+Source d2         ldu        pc, [sp, #1]
+Source d3         stu        lr, [sp, #-1]
+Source d4         cmp        r0, #1
+Source d5         beq        true
+Source d6 false:  mov     r0, #'F
+Source d7         swi       #SysPutChar
+Source d8         mov       r0, #'a
+Source d9         swi       #SysPutChar
+Source da         mov       r0, #'l
+Source db         swi       #SysPutChar
+Source dc         mov       r0, #'s
+Source dd         swi       #SysPutChar
+Source de         mov       r0, #'e
+Source df         swi       #SysPutChar
+Source e0         ldu       lr, [sp, #-1]
+Source e1 true:   mov    r0, #'T
+Source e2         swi       #SysPutChar
+Source e3         mov       r0, #'r
+Source e4         swi       #SysPutChar
+Source e5         mov       r0, #'u
+Source e6         swi       #SysPutChar
+Source e7         mov       r0, #'e
+Source e8         swi       #SysPutChar
+Source e9         ldu       lr, [sp, #-1]
+Source ea         swi       #SysHalt
+End

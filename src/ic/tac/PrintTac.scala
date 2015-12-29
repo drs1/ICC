@@ -67,6 +67,8 @@ object TACOPrinter{
          out.indentLess();
        }
        
+       case p: TAC_Preamble => {}
+       
        //Branching, control flow
         case TAC_Label(label: String, line: Int, comment: String) => {
           //print the label to the left of other code

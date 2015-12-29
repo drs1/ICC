@@ -98,10 +98,11 @@ abstract class AbsASMInstr(val uses: List[VirtualRegister],
  */
 case class AbsASMComment(val lineComment: String, override val uses: List[VirtualRegister] = Nil, override val defines: List[VirtualRegister] = Nil)
         extends AbsASMInstr(uses, defines, "") {
-    override def toString() = String.format("# %s", lineComment.replace("\n", "\\n"));
+    override def toString() = String.format("%s", lineComment.replace("\n", "\\n"));
     override def devirtualize(regMap: Map[VirtualRegister, PhysicalRegister]): ASMInstr =
         ASMComment(lineComment);
 }
+
 
 
 /**

@@ -44,7 +44,7 @@ object ASMPrinter {
             case ASMOp(format, comment) if (format.contains(":")) => LABEL_INDENT
             case ASMOp(format, comment) => OP_INDENT
         }
-        String.format("%-50s# %s", String.format("%s%s", indent, a), a.comment);
+        String.format("%-50s"+ ASMInstr.commentSequence + "%s", String.format("%s%s", indent, a), a.comment);
     }
     
      def asmToString(a : Iterable[ASMInstr]): String = {

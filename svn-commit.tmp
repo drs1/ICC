@@ -1,0 +1,8 @@
+
+--This line, and those below, will be ignored--
+
+D    .cache-main
+M    src/ic/cg_warm/TACtoAbsASM.scala
+M    src/ic/cg_warm/WARMCodeGenerator.scala
+M    test/qsort_test.ic
+M    test/qsort_test.s

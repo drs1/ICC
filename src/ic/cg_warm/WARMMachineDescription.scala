@@ -26,10 +26,12 @@ object WARMMachineDescription extends MachineDescription{
   
   def PC(): PhysicalRegister = WPC;
   def FP(): PhysicalRegister = WFP;
-
   
+  def commentChar() = ";;;"
+
   def callerSaveRegisters(): List[PhysicalRegister] =
-    List[PhysicalRegister](R0, R1, R2);
+    List[PhysicalRegister]( R0, // R1, 
+        R2);
  
   def calleeSaveRegisters(): List[PhysicalRegister] =
     List[PhysicalRegister](R4, R5, R6, R7, R8, R9, R10)
@@ -39,11 +41,11 @@ object WARMMachineDescription extends MachineDescription{
   def sizeOfDataElement(): Int = 1;
   
   def copyFromStack(offsetFromFP: Int, dst: PhysicalRegister, comment: String): ASMInstr = {
-      ASMOp("ldr " + "'do, [fp, " + offsetFromFP + " ]", Nil, dst, comment); 
+      ASMOp("ldr " + "'d0, [fp, #" + offsetFromFP + " ]", Nil, dst, comment); 
   }
   
   def copyToStack(src: PhysicalRegister, offsetFromFP: Int, comment : String): ASMInstr = {
-      ASMOp("str " + "'u0, [fp, " + offsetFromFP + " ]", src, Nil, comment);
+      ASMOp("str " + "'u0, [fp, #" + offsetFromFP + " ]", src, Nil, comment);
   }
   
   def copyToReg(src: PhysicalRegister, dst: PhysicalRegister, comment : String): ASMInstr = {
@@ -51,10 +53,13 @@ object WARMMachineDescription extends MachineDescription{
   }
   
   def copyFromStack(offsetFromFP: Int, dst: VirtualRegister, comment : String): AbsASMInstr = {
-      AbsASMOp("ldr " + "'do, [fp, " + offsetFromFP + " ]", Nil, dst, comment);     
+      AbsASMOp("ldr " + "'d0, [fp, #" + offsetFromFP + " ]", Nil, dst, comment);     
   }
   
   def copyToStack(src: VirtualRegister, offsetFromFP: Int, comment : String): AbsASMInstr = {
-      AbsASMOp("str " + "'u0, [fp, " + offsetFromFP + " ]", src, Nil, comment);    
+      AbsASMOp("str " + "'u0, [fp, #" + offsetFromFP + " ]", src, Nil, comment);    
   }
+  
+  def preColoredRegisters(): List[PhysicalRegister] =
+        List[PhysicalRegister]();
 }

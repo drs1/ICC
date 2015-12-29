@@ -1,0 +1,13 @@
+class A{
+    void main(string[] args){
+    	 int n;
+
+	 n = 2;
+
+	 if(n > 0){
+	      Library.println("yes");
+	 }else{
+	      Library.println("no");
+	 }
+    }
+}

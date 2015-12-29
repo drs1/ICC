@@ -1,0 +1,14 @@
+class RegAllocTest {
+      void main(string[] args) {
+      	   int i = 1;
+	   int j = 2;
+	   int k = 3;
+	   int a = 4;
+	   int b = 5;
+	   int ijk;
+
+	   ijk = i + j + k + a + b;
+
+	   Library.printi(ijk);
+	   }
+}

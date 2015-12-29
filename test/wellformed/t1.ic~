@@ -1,0 +1,8 @@
+class A{
+      void main(string[] args){
+      	   int i;
+	   string s;
+	   i = 1+2;
+	   Library.printi(i);
+      }
+}

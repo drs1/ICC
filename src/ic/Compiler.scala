@@ -1,5 +1,6 @@
 package ic
 import ic.error._
+import ic.error.LexicalError
 import ic.opt._
 import ic.cfg._
 import ic.cg._
@@ -133,18 +134,18 @@ object Compiler {
 				  n = n + 1;
 				}
 
-         val codeGen = new WARMCodeGenerator(file, ast, () => new SimpleRegisterAllocator(WARMMachineDescription));
-         //if (args.contains("-x86")) {
-            //new SimpleX86CodeGenerator(file, ast, () => new SimpleRegisterAllocator(X86MachineDescription));
-         //} else if (args.contains("-regs")) {
- //        new SimpleX86CodeGenerator(file, ast, () => new BijansRegisterAllocator(X86MachineDescription));
-//           null
-  //       } else if (args.contains("-warm")) {
-    //        new WARMCodeGenerator(file, ast, () => new SimpleRegisterAllocator(WARMMachineDescription));
+         val codeGen =// = new WARMCodeGenerator(file, ast, () => new SimpleRegisterAllocator(WARMMachineDescription));
+         if (args.contains("-x86")) {
+            new SimpleX86CodeGenerator(file, ast, () => new SimpleRegisterAllocator(X86MachineDescription));
+         } else if (args.contains("-regs")) {
+           new SimpleX86CodeGenerator(file, ast, () => new BijanRegisterAllocator(X86MachineDescription));
            //null
-         //} else {
-          //new CodeGenerator64(file, ast);
-         //}
+         } else if (args.contains("-warm")) {
+            new WARMCodeGenerator(file, ast, () => new BijanRegisterAllocator(WARMMachineDescription));
+           //null
+         } else {
+           new CodeGenerator64(file, ast);
+         }
 				
 //				val codeGen: CodeGenerator64 = new CodeGenerator64(file, ast);
          codeGen.generate();

@@ -20,24 +20,35 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
   var classForMain = ""
   var sizeOfMainObject = -1;
   var offsetOfMainInVT = -1;
+  
+  ASMInstr.commentSequence = ";;;"
 
   def generate() = {
     out.println(";;;  File " + asmFile);
     out.println();
-    out.println(".requ	bump, r3");    
+    out.println("\t .requ	bump, r3");    
     out.println("\t b      main");    
     
     generateVTables();
+    out.println("\n")
+    
+    out.println("\n")    
     generateCode()
-    //generateErrorHandlers();
+    generateErrorHandlers();
 
 
     //Main not found in any of the classes
     if (classForMain.equals("")) {throw new SemanticError("No main method found in the file.");}
 
     generateMain(classForMain, sizeOfMainObject, offsetOfMainInVT);
-  //  generateStringConstants();
+    generateStringConstants();
+    genLibCalls();
+    generateHeap();
     out.close();
+  }
+  
+  protected def generateHeap() = {
+    out.println("heap:")
   }
 
   protected def generateVTables() = {
@@ -45,7 +56,7 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
     out.println(";; VTables");
 
     out.println();
-    out.println(".align 4");
+
     out.println("");
 
     for (cls <- program.classes) {
@@ -73,7 +84,8 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
         }
       }
 
-      out.println("\t.data \t" + vTable.map(x => x._2 + x._3.capitalize).mkString(", "));
+      out.println("\t.data \t" + vTable.map(x => x._2 + x._3.capitalize).mkString(", ") + "," + 0);
+      out.println("")
       
     }
   }
@@ -130,7 +142,8 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
     // Add formals and "this" to virtual register offset map so
     // we can find them later
     for (x <- m.forms) {
-      regAlloc.addVirtualRegister(VirtualRegister(x.id), x.offset * WARMMachineDescription.sizeOfDataElement());
+      println(x + " " + x.offset);
+      regAlloc.addVirtualRegister(VirtualRegister(x.id), (x.offset * WARMMachineDescription.sizeOfDataElement()));
     }
     regAlloc.addVirtualRegister(VirtualRegister("this"), 2 * WARMMachineDescription.sizeOfDataElement());
 
@@ -155,27 +168,26 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
      
      /*************************************/
     
-    out.println("_" + cls.cls_id + "_" + m.id + ":");
-    out.println("\t# ----- prologue ------");
-    out.println("\tpushq %rbp");
-    out.println("\tmovq %rsp, %rbp");
+    out.println(cls.cls_id + m.id.capitalize + ":");
     
-    // move %rsp below all allocated virtual register slots.
-    out.println("\tsubq $" + -(regAlloc.getMaxHomeOffset() - WARMMachineDescription.firstAvailableOffsetForLocals()) + ", %rsp");
+    out.println("\tstu    lr, [sp, #-1]")
+    out.println("\tstu    fp, [sp, #-1]");
+    out.println("\tmov    fp, sp");
+    // move sp below all allocated virtual register slots.
+    out.println("\tsub    sp, sp, #" + -(regAlloc.getMaxHomeOffset() - WARMMachineDescription.firstAvailableOffsetForLocals()));
     
     out.println("")
     
-    out.println("\t# ---- method instructions ------")
+    out.println("\t;;; ---- method instructions ------")
     
-    //out.println(ASMPrinter.asmToString(asm.flatMap(_.contents)));
+    out.println(ASMPrinter.asmToString(asm.flatMap(_.contents)));
 
     out.println("")
 
-    out.println("epilogue_" + cls.cls_id + "_" + m.id + ":");
-    out.println("movq %rbp,%rsp");
-    out.println("popq %rbp");
-    out.println("ret");
-    out.println("\n");
+    //out.println("\tmov    sp, fp");
+    //out.println("\tldu    fp, [sp, #1]");
+    //out.println("\tldu    pc, [sp, #1]");
+    //out.println("\n");
   }
   
   
@@ -183,50 +195,40 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
     out.println(";; ----------------------------");
     out.println(";; Error handling.  Jump to these procedures when a run-time check fails.");
     out.println("");
-    out.println(".align 4");
     out.println("strNullPtrError: \n\t .string \t\"Null pointer violation.\"");
     out.println("");
-    out.println(".align 4");
-    out.println("  strArrayBoundsError: \n\t.string \t \"Array bounds violation.\"");
+    out.println("strArrayBoundsError: \n\t.string \t \"Array bounds violation.\"");
     out.println("");
-    out.println(".align");
-    out.println("strArraySizeErrorChars: \n\t	.string \t \"Array size violation.\"");
+    out.println("strArraySizeError: \n\t	.string \t \"Array size violation.\"");
     out.println("");
-    out.println(".align");
-    out.println("divByZeroErrorChars:   \n\t  .string \"Divide by 0 violation.\"");
+    out.println("strdivByZeroError:   \n\t  .string \"Divide by 0 violation.\"");
     out.println("");
 
-    out.println(".text");
-    out.println(".align 8");
     out.println("labelNullPtrError:");
-    out.println("    movq strNullPtrError(%rip), %rdi");
-    out.println("    call __LIB_println");
-    out.println("    movq $1, %rdi");
-    out.println("    call __LIB_exit");
-    out.println("");
-    out.println(".align 8");
+    out.println("\t adr    r0, strNullPtrError");
+    out.println("\t bl     LIBPrintln");
+    out.println("\t mov    r0, #1");
+    out.println("\t swi    #SysHalt");
+    out.println("\n");
+
     out.println("labelArrayBoundsError:");
-    out.println("    movq strArrayBoundsError(%rip), %rdi");
-    out.println("    call __LIB_println");
-    out.println("    movq $1, %rdi");
-    out.println("    call __LIB_exit");
-    out.println("");
-    out.println(".align 8");
+    out.println("\t adr    r0, strArrayBoundsError");
+    out.println("\t bl     LIBPrintln");
+    out.println("\t mov    r0, #1");
+    out.println("\t swi    #SysHalt");
+    out.println("\n");
     out.println("labelArraySizeError:");
-    out.println("    movq strArraySizeError(%rip), %rdi");
-    out.println("    call __LIB_println");
-    out.println("    movq $1, %rdi");
-    out.println("    call __LIB_exit");
-    out.println("");
-    out.println(".align 8");
+    out.println("\t adr    r0, strArraySizeError");
+    out.println("\t bl     LIBPrintln");
+    out.println("\t mov    r0, #1");
+    out.println("\t swi    #SysHalt");
+    out.println("\n");
     out.println("labelDivByZeroError:");
-    out.println("    movq divByZeroError(%rip), %rdi");
-    out.println("    call __LIB_println");
-    out.println("    movq $1, %rdi");
-    out.println("    call __LIB_exit");
-    out.println("");
-    out.println("");
-    out.println("");
+    out.println("\t adr    r0, strdivByZeroError");
+    out.println("\t bl     LIBPrintln");
+    out.println("\t mov    r0, #1");
+    out.println("\t swi    #SysHalt");
+    out.println("\n\n");
   }
 
   /**
@@ -239,17 +241,17 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
    */
   protected def generateMain(className: String, objectSize: Int, indexOfMainInVTable: Int) = {
     out.println("");
-    out.println(".align 4");
+
     out.println("main:");
     out.println(";;; main, set the bump pointer to the beginning of the heap");
     out.println("\t adr    bump, heap      				")
-    out.println("\t stu    lr, [sp, #1]    				");
-    out.println("\t stu    fp, [sp, #1]    				");
+    out.println("\t stu    lr, [sp, #-1]    				");
+    out.println("\t stu    fp, [sp, #-1]    				");
     out.println("\t mov    fp, sp         			  ");
     out.println("");    
     out.println(s";;; o = new $className          ");
-    out.println(s"\t mov    $$${objectSize}, r0   ");
-    out.println("\t bl     LIBAllocObject   			");
+    out.println(s"\t mov    r0,  #${objectSize}   ");
+    out.println("\t bl     LIBAllocateObject   			");
     out.println(s"\t adr    r1, ${className}VT      ");
     out.println("");
     out.println(";;; move the vptr into the object");          
@@ -257,6 +259,8 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
     out.println("");
     out.println("");
     out.println(";;; call the object's main       ");
+    out.println("\t stu    r0, [sp, #-1]  ");
+    out.println("\t stu    r0, [sp, #-1]  ");
     out.println(s"\t bl     ${className}Main      ");
     out.println("");
     out.println("");
@@ -266,32 +270,134 @@ class WARMCodeGenerator(override val icFileName: String, override val program: A
     out.println("\t ldu    fp, [sp, #1]           ");
     out.println("\t swi    #SysHalt"               );
     out.println("");
-    out.println("heap:");
   }
   /**
    * Iterate over all used string constants and print them into
    * a data segment.  You should not need to change this method.
    */
   protected def generateStringConstants() = {
-    out.println("# ----------------------------");
-    out.println("# String Constants");
+    out.println(";;; ----------------------------");
+    out.println(";;; String Constants");
 
-    out.println();
-    out.println(".data");
-    out.println(".align 8");
-    out.println();
-
+    out.println("\n");
+    
     for ((str, label) <- CodeGenerator.stringConstantsToLabel) {
-      val len = str.length();
-      out.println(s".quad $len");
       val escapedString =
         "\"" + str.replace("\n", "\\n").replace("\t", "\\t").replace("\"", "\\\"").replace("\r", "\\r") + "\"";
-      out.println(s"  ${label}Chars:\t.ascii ${escapedString}");
-      out.println(s"${label}:\t.quad ${label}Chars");
-    }
+      out.println(s"${label}:\t.string ${escapedString}");
+      }
     out.println("");
     out.println("");
     out.println("");
+  }
+  
+  
+  protected def genLibCalls() = {
+    out.println(";;; ------------------------------")
+    out.println(";;; Library Calls")
+    out.println("");
+    out.println("");
+    out.println("LIBAllocateObject:");
+    out.println(";;; object size gets passed in r0");                                                    out.println("\tstu     lr, [sp, #-1]");
+    out.println("\tmov     r1, bump");
+    out.println("\tadd     bump, r0, bump");
+    out.println("\tmov     r0, r1");
+    out.println("\tldu     pc, [sp, #1]");
+    out.println("\n")
+
+    out.println("LIBRandom:");
+    out.println("\t	stu	lr, [sp, #-1]	");
+    out.println("\t	mov	r1, r0");
+    out.println("randLoop:");
+    out.println("\t	swis	#SysEntropy")
+
+    out.println(";;; make sure it's not negative");
+    out.println("\t	blt	randLoop");
+    out.println("\t	cmp	r1, r0");
+    out.println("\t blt	randLoop");
+    out.println("\t ldu	pc, [sp, #1]");
+    out.println("\n")	
+
+
+    out.println("LIBAllocateArray:");
+    out.println("\tstu	   lr, [sp, #-1]");
+    out.println("\tstr     r0, [bump]");
+    out.println("\tmov	   r1, bump");
+    out.println("\tadd	   bump, r0, bump");
+    out.println("\tmov	   r0, r1");
+    out.println("\tldu	   pc, [sp, #1]");
+    out.println("\n")
+
+    out.println("LIBPrintln:");
+    out.println(";;; address of the string is in r0");
+    out.println("\t stu	lr, [sp, #-1]");
+    out.println("\t mov	r1, r0");
+    out.println("\n");
+
+    out.println("printlnLoop:	")
+    out.println("\t ldrs   r0, [r1]");
+    out.println("\t beq    printlnDone");
+    out.println("\t swi    #SysPutChar");
+    out.println("\t add    r1, r1, #1");
+    out.println("\t b      printlnLoop");
+    out.println("\n")
+
+    out.println("printlnDone:");
+    out.println("\t mov	   r0, #10");
+    out.println("\t swi	   #SysPutChar");
+    out.println("\t ldu	   pc, [sp, #1]");
+    out.println("\t \n");
+
+    out.println("LIBPrint:")
+    out.println("\tstu	lr, [sp, #-1]");
+    out.println("\tmov	r1, r0");
+	
+    out.println("printLoop:")
+    out.println("\tldrs    r0, [r1]");
+    out.println("\tbeq	   printDone");
+    out.println("\tswi	   #SysPutChar");
+    out.println("\tadd	   r1, r1, #1");
+    out.println("\tb	     printLoop");
+    out.println("printDone:");
+    out.println("\tldu	   pc, [sp, #1]");
+    
+
+    out.println("LIBPrinti:");
+    out.println("\tstu	   lr, [sp, #-1]");
+    out.println("\tswi	   #SysPutNum");
+    out.println("\tldu	   pc, [sp, #1]");
+    out.println("\n\n")
+	
+    out.println("LIBPrintb:");
+    out.println("\tstu	   lr, [sp, #-1]");
+    out.println("\tcmp	   r0, #1");
+    out.println("\tbeq	   true");
+    out.println("\n")
+
+    out.println("false:	mov	r0, #'F");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'a");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'l");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'s");
+    out.println("\tswi 	  #SysPutChar")
+    out.println("\tmov	  r0, #'e");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tldu	  pc, [sp, #1]");
+
+    out.println("true:	mov    r0, #'T");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'r");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'u");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tmov	  r0, #'e");
+    out.println("\tswi 	  #SysPutChar");
+    out.println("\tldu	  pc, [sp, #1]");
+
+    out.println("LIBExit:");
+    out.println("\tswi	  #SysHalt")    
   }
 }
 
